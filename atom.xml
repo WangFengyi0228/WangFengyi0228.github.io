@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangfengyi0228.github.io</id>
-    <title>Gridea</title>
-    <updated>2021-09-25T07:47:16.180Z</updated>
+    <title>wfy0228</title>
+    <updated>2021-09-25T07:52:04.323Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangfengyi0228.github.io"/>
     <link rel="self" href="https://wangfengyi0228.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://wangfengyi0228.github.io/images/avatar.png</logo>
     <icon>https://wangfengyi0228.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2021, wfy0228</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://wangfengyi0228.github.io/post/hello-gridea/</id>
