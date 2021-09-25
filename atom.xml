@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangfengyi0228.github.io</id>
-    <title>wfy0228</title>
-    <updated>2021-09-25T07:56:55.901Z</updated>
+    <title>wfy&apos;s blog</title>
+    <updated>2021-09-25T08:05:48.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangfengyi0228.github.io"/>
     <link rel="self" href="https://wangfengyi0228.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>小王怎样才能不失眠呢</subtitle>
     <logo>https://wangfengyi0228.github.io/images/avatar.png</logo>
     <icon>https://wangfengyi0228.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, wfy0228</rights>
+    <rights>All rights reserved 2021, wfy&apos;s blog</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://wangfengyi0228.github.io/post/hello-gridea/</id>
