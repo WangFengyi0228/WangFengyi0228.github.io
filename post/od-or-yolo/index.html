@@ -1,22 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://wangfengyi0228.github.io</id>
-    <title>one in a million</title>
-    <updated>2021-11-12T06:03:19.532Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://wangfengyi0228.github.io"/>
-    <link rel="self" href="https://wangfengyi0228.github.io/atom.xml"/>
-    <subtitle>我在你的心里，有没有一点特别</subtitle>
-    <logo>https://wangfengyi0228.github.io/images/avatar.png</logo>
-    <icon>https://wangfengyi0228.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, one in a million</rights>
-    <entry>
-        <title type="html"><![CDATA[OD | YOLO]]></title>
-        <id>https://wangfengyi0228.github.io/post/od-or-yolo/</id>
-        <link href="https://wangfengyi0228.github.io/post/od-or-yolo/">
-        </link>
-        <updated>2021-11-12T04:47:44.000Z</updated>
-        <content type="html"><![CDATA[<p>参考文献</p>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>OD | YOLO | one in a million</title>
+<meta name="description" content="我在你的心里，有没有一点特别">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636696982383">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wangfengyi0228.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://wangfengyi0228.github.io">
+        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636696982383" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://wangfengyi0228.github.io">
+        <h1 class="site-title">one in a million</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">OD | YOLO</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-11-12</span>
+            
+          </div>
+          <div class="post-content">
+            <p>参考文献</p>
 <ul>
 <li>[1]Redmon J , Divvala S , Girshick R , et al. You Only Look Once: Unified, Real-Time Object Detection[C]// Computer Vision &amp; Pattern Recognition. IEEE, 2016.</li>
 <li>[2]Redmon J , Farhadi A . YOLO9000: Better, Faster, Stronger[C]// IEEE Conference on Computer Vision &amp; Pattern Recognition. IEEE, 2017:6517-6525.</li>
@@ -133,502 +203,58 @@ Head: YOLOv3</p>
 </ul>
 <p>YOLOv5初步移植到手机后的效果图：<br>
 <img src="https://wangfengyi0228.github.io/post-images/1636696976292.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Qt | 智能巡检机器人项目]]></title>
-        <id>https://wangfengyi0228.github.io/post/qt-or-zhi-neng-xun-jian-ji-qi-ren-xiang-mu/</id>
-        <link href="https://wangfengyi0228.github.io/post/qt-or-zhi-neng-xun-jian-ji-qi-ren-xiang-mu/">
-        </link>
-        <updated>2021-08-28T03:38:37.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>notes:该机器人使用卫星进行经纬度定位，适用于开阔地带，初始化搜星数达到19以上为佳，距离精度精确到小数点后16位（以米为单位）<br>
-<strong>项目总体框图：</strong><br>
-<img src="https://wangfengyi0228.github.io/post-images/1636688828688.png" alt="" loading="lazy"><br>
-<strong>逻辑流程图：</strong><br>
-<img src="https://wangfengyi0228.github.io/post-images/1636691559203.png" alt="" loading="lazy"><br>
-<strong>ChasisSender</strong><br>
-ChasisSender构造即启动两个串口（Imu串口和Cmd串口），Imu串口负责接收Imu数据和定位数据，将数据解析后发送到LtkjCenter。Cmd串口负责发送控制指令（速度和转角）到底盘控制器，自定义格式为“$cmd,转角,速度\r\n”。Cmd串口数据的发送在接收到LtkjCenter的control_msg信号后，开始发送，接收到control_msg.cmd_stop信号后关闭cmd串口，停止发送。</p>
-</blockquote>
-<ul>
-<li>Signal:Chasis_state_signal(ChasisState) 向LtkjCenter发送底盘状态</li>
-<li>Signal:Car_position_signal(Position) 向LtkjCenter发送车辆位置</li>
-<li>Slot:ProcessImuMsg_slot() 接收Imu串口消息</li>
-</ul>
-<pre><code>void ChasisSender::ProcessImuMsg_slot()
-{
-    if(!imu_serial-&gt;canReadLine())   return ;
-    QByteArray readData = imu_serial-&gt;readAll();
-    if(readData.isEmpty())  return ;
 
-    if(readData[0] == '$')
-    {
-        QString ImuData_str = QString(readData);
-        QStringList tmpImuData_Lis = ImuData_str.split(&quot;,&quot;);
+          </div>
+        </div>
 
-        if (tmpImuData_Lis.count() == 24)
-        {
-            QString imuYawangle_str = tmpImuData_Lis[3];
-            QString imuLatitude_str = tmpImuData_Lis[12];
-            QString imuLongitude_str = tmpImuData_Lis[13];
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/qt-or-zhi-neng-xun-jian-ji-qi-ren-xiang-mu/">
+              <h3 class="post-title">
+                下一篇：Qt | 智能巡检机器人项目
+              </h3>
+            </a>
+          </div>
+          
+      </div>
 
-            Position tmp_position(0, 0, 0);
-            tmp_position.x = imuLongitude_str.toDouble();
-            tmp_position.y = imuLatitude_str.toDouble();
-            tmp_position.theta = imuYawangle_str.toDouble();
+      
 
-            WGS2CART(car_position_,tmp_position);
-            car_position_.x -= Origin_position_.x;
-            car_position_.y -= Origin_position_.y;
+      <div class="site-footer">
+  <div class="slogan">我在你的心里，有没有一点特别</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Copyright by WFY | <a class="rss" href="https://wangfengyi0228.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-            qDebug() &lt;&lt; &quot;x: &quot; &lt;&lt; car_position_.x &lt;&lt; &quot; y: &quot; &lt;&lt; car_position_.y &lt;&lt; &quot; z: &quot; &lt;&lt; car_position_.theta;
 
-            chasis_state_.imu_state_ = 1;
-            emit Chasis_state_signal(chasis_state_); 
-            emit Car_position_signal(car_position_);  
-       }
-    }
-    imu_serial-&gt;clear();
-}
+    </div>
+    <script type="application/javascript">
 
-•Slot:ReceiveCmdMsg_slot(control_msg) 接收LtkjCenter控制指令
-void ChasisSender::ReceiveCmdMsg_slot(control_msg msg)  
-{
-    if(!msg.cmd_stop)
-    {
-        if(cmd_serial-&gt;isOpen())
-        {
-            cmd_angle = msg.cmd_angle;
-            cmd_speed = msg.cmd_speed;
-            SendCmdSerialData();
-        }
-        else
-        {
-            OpenCmdSerialport();
-        }
-    }
-    else
-    {
-        if(cmd_serial-&gt;isOpen())
-        {
-            CloseCmdSerialport();
-        }
-    }
-}
-</code></pre>
-<p><strong>UdpReceiver</strong><br>
-UdpReceiver构造即启动udp接收，具体绑定的IP和端口需要在构造函数中修改，这里不再提供修改的接口。接收的槽函数已经写好，解析需要根据协议来定，这个留着后期再加。测试阶段只保证实现功能。在udp接收槽接收到消息之后，进行解析，发送任务指令到LtkjCenter。</p>
-<ul>
-<li>Signal:CommandSingal(task_msg) 向LtkjCenter发送任务命令</li>
-<li>Slot:Udp_receiver_slot() 接收udp消息并进行解析</li>
-<li>Slot:Udp_position_slot(Position); 接收LtkjCenter车辆位置信息</li>
-<li>Slot:Send_Timer_slot() 向LtkjCenter发送心跳</li>
-</ul>
-<pre><code>void UdpReceiver::Udp_receiver_slot() 
-{
-    while (udp_receiver_-&gt;hasPendingDatagrams()) 
-    {
-        QByteArray datagram;
-        datagram.resize(udp_receiver_-&gt;pendingDatagramSize( ));
-        udp_receiver_-&gt;readDatagram (datagram.data( ), datagram.size());
+hljs.initHighlightingOnLoad()
 
-        if(datagram[0] == '$')
-        {
-            QString udp_str = QString(datagram);
-            QStringList udp_str_list = udp_str.split(&quot;,&quot;);
-            if(udp_str_list.count() == 4)
-            {
-                action = udp_str_list[1].toInt();
-                end_pos_.setX(udp_str_list[2].toDouble());
-                end_pos_.setY(udp_str_list[3].toDouble());
-            }
-        }
-        // qDebug() &lt;&lt; datagram;
-        task_msg_.state = action;
-        task_msg_.point_target = end_pos_;
-        emit CommandSingal(task_msg_);
-    }
-}
-</code></pre>
-<p><strong>LtkjCenter</strong><br>
-LtkjCenter包含了LtkjMap和LtkjControl两个类。<br>
-逻辑见流程图</p>
-<ul>
-<li>Signal:Chasis_cmd_signal(control_msg) 向ChasisSender发送控制指令，转角和速度以及停止信号</li>
-<li>Slot:Command_slot(QString cmd) 接收UdpReceiver任务消息</li>
-</ul>
-<pre><code>void LtkjCenter::Command_slot(task_msg cmd)
-{
-    qDebug() &lt;&lt; &quot;rece from udp: &quot; &lt;&lt; cmd.state &lt;&lt; &quot; and &quot; &lt;&lt; cmd.point_target;
-    if(cmd.state == 0)
-    {
-        if(track_timer-&gt;isActive())
-        {
-            track_timer-&gt;stop();
-        }
-        SetReady();
-    }
-    else if(cmd.state == 1)
-    {
-        end_position_.x = cmd.point_target.x();
-        end_position_.y = cmd.point_target.y();
-        end_position_.theta = 0;
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-        if(map_path_state_.map_state_ == 1 &amp;&amp; chasis_state_.imu_state_ == 1)
-        {
-            Position2QPointF(car_point, car_position_);
-            Position2QPointF(end_point, end_position_);
-            map_.AStar(car_point, end_point);           
-            UpdateMapState();
-        }
-        else
-        {
-            qDebug() &lt;&lt; &quot;Error: map_state = 0 !&quot;;
-            SetReady();
-            return ;
-        }
+</script>
 
-        if(map_path_state_.path_state_ == 1)
-        {
-            if(!track_timer-&gt;isActive())
-            {
-                track_timer-&gt;start(100);
-            }
-            else
-            {
-                SetReady();
-                track_timer-&gt;start(100);
-                qDebug() &lt;&lt; &quot;Warning: New Task Failed, Track task is in Progress&quot;;
-            }
 
-        }
-        else
-        {
-            qDebug() &lt;&lt; &quot;Error: map_path = 0!&quot;;
-            return ;
-        }
-    }
-}
-</code></pre>
-<ul>
-<li>Slot:Chasis_state_slot(ChasisState) 接收ChasisSender底盘状态消息<pre><code></code></pre>
-</li>
-</ul>
-<p>void LtkjCenter::Chasis_state_slot(ChasisState state)<br>
-{<br>
-chasis_state_.imu_state_ = state.imu_state_;<br>
-}```</p>
-<ul>
-<li>Slot:Chasis_position_slot(Position) 接收ChasisSender车辆位置消息</li>
-</ul>
-<pre><code class="language-void">{
-    car_position_.x = pos.x;
-    car_position_.y = pos.y;
-    car_position_.theta = pos.theta;
 
-    emit Position_signal(car_position_);
-}```
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Practice | Missing number]]></title>
-        <id>https://wangfengyi0228.github.io/post/practice-or-missing-number/</id>
-        <link href="https://wangfengyi0228.github.io/post/practice-or-missing-number/">
-        </link>
-        <updated>2021-04-26T04:40:22.000Z</updated>
-        <content type="html"><![CDATA[<p>Given a positive integer n(n≤40), pick n-1 numbers randomly from 1 to n and concatenate them in random order as a string s, which means there is a missing number between 1 and n. Can you find the missing number?(Notice that in some cases the answer will not be unique, and in these cases you only need to find one valid answer.）</p>
-<h2 id="sample-input-1">Sample Input 1:</h2>
-<p>20<br>
-81971112205101569183132414117</p>
-<h2 id="sample-output-1">Sample Output 1:</h2>
-<p>16</p>
-<h1 id="solution">Solution:</h1>
-<pre><code>#include &lt;bits/stdc++.h&gt;
 
-using namespace std;
-
-int len,n;
-bool f[100];
-string s;
-int num[100];
-
-void dfs(int k)
-{
-    if(k&gt;=len)
-    {
-        for(int i=1;i&lt;=n;i++)
-        {
-            if(f[i]==false)
-            {
-                printf(&quot;%d\n&quot;,i);
-            }
-        }
-        return;
-    }
-    if(f[num[k]]==false)
-    {
-        f[num[k]]=true;
-        dfs(k+1);
-        f[num[k]]=false;
-    }
-    if(f[num[k]*10+num[k+1]]==false&amp;&amp;num[k]*10+num[k+1]&lt;=n)
-    {
-        f[num[k]*10+num[k+1]]=true;
-        dfs(k+2);
-        f[num[k]*10+num[k+1]]=false;
-    }
-}
-
-int main()
-{
-    scanf(&quot;%d&quot;,&amp;n);
-    cin&gt;&gt;s;
-    for(int i=0;i&lt;s.size();i++)
-    {
-        num[i]=s[i]-'0';
-    }
-    len=s.size();
-    dfs(0);
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Practice | Count number of binary strings without consecutive 1’s]]></title>
-        <id>https://wangfengyi0228.github.io/post/practice-or-count-number-of-binary-strings-without-consecutive-1s/</id>
-        <link href="https://wangfengyi0228.github.io/post/practice-or-count-number-of-binary-strings-without-consecutive-1s/">
-        </link>
-        <updated>2021-03-16T04:43:16.000Z</updated>
-        <content type="html"><![CDATA[<p>Given a positive integer n(3≤n≤90), count all possible distinct binary strings of length n such that there are no consecutive 1's .</p>
-<h2 id="sample-input-1">Sample Input 1:</h2>
-<p>2</p>
-<h2 id="sample-output-1">Sample Output 1:</h2>
-<p>3 // The 3 strings are 00, 01, 10</p>
-<h2 id="sample-input-2">Sample Input 2:</h2>
-<p>3</p>
-<h2 id="sample-output-2">Sample Output 2:</h2>
-<p>5 // The 5 strings are 000, 001, 010, 100, 101</p>
-<h1 id="solution">Solution:</h1>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-
-using namespace std;
-
-int pao(int n)
-{
-    if(n==1)
-    {
-        return 2;
-    }
-    else if(n==2)
-    {
-        return 3;
-    }
-    else
-    {
-        return pao(n-1)+pao(n-2);
-    }
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    int dp[100][2];
-    dp[1][0]=1;
-    dp[1][1]=1;
-    for(int i=2;i&lt;=n;i++)
-    {
-        dp[i][0]=dp[i-1][0]+dp[i-1][1];
-        dp[i][1]=dp[i-1][0];
-    }
-    printf(&quot;%d\n&quot;,dp[n][0]+dp[n][1]);
-    printf(&quot;%d\n&quot;,pao(n));
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[OD | 术语名词]]></title>
-        <id>https://wangfengyi0228.github.io/post/od-or-zhu-yu-ming-ci/</id>
-        <link href="https://wangfengyi0228.github.io/post/od-or-zhu-yu-ming-ci/">
-        </link>
-        <updated>2020-11-30T04:45:25.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>1.学习率</strong><br>
-学习率是在梯度下降的过程中更新权重时的超参数，当学习率过大的时候会导致模型难以收敛，过小的时候会收敛速度过慢，学习率是一个十分重要的超参数，合理的学习率才能让模型收敛到最小点而非局部最优点或鞍点。</p>
-<p><strong>2.损失函数</strong><br>
-损失函数是将随机事件或其有关随机变量的取值映射为非负实数，以表示该随机事件的“风险”或“损失”的函数。</p>
-<p><strong>3.召回率</strong><br>
-召回率是针对原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。预测有两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)。则</p>
-<p><strong>4.交并比（IOU）</strong><br>
-交并比时在目标检测任务中，计算两个边界框（定位的边界框和实际边界框）的交集和并集之比。一般约定,0.5 是阈值，用来判断预测的边界框是否正确，IOU越高，边界框越精确。</p>
-<p><strong>5.非极大值抑制</strong><br>
-算法可能对同一个对象做出多次检测，非极大值抑制这个方法可以确保算法对每个对象只检测一次。首先看检测概率最大的边界框，进行标记，之后非极大值抑制就会逐一审视剩下的矩形，所有和这个最大的边框有很高交并比、高度重叠的其他边界框，输出就会被抑制。</p>
-<p><strong>6.mAP(mean Average Precision)</strong><br>
-查准率（Precision）: TP/(TP + FP);查全率（即各类别 AP 的平均值Recall）: TP/(TP + FN)。二者绘制的曲线称为 P-R 曲线。AP是PR 曲线下面积。mAP即各类AP的平均值，用来衡量目标检测中的识别精度。</p>
-<p><strong>7.感受野（Receptive Field）</strong><br>
-在卷积神经网络中，感受野（Receptive Field）的定义是卷积神经网络每一层输出的特征图（feature map）上的像素点在输入图片上映射的区域大小，即特征图上的一个点对应输入图上的区域。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Practice | Root of AVL Tree]]></title>
-        <id>https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/</id>
-        <link href="https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/">
-        </link>
-        <updated>2019-11-19T04:36:26.000Z</updated>
-        <content type="html"><![CDATA[<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636692006948.png" alt="" loading="lazy"><br>
-Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
-<h1 id="input-specification">Input Specification:</h1>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤20) which is the total number of keys to be inserted. Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
-<h1 id="output-specification">Output Specification:</h1>
-<p>For each test case, print the root of the resulting AVL tree in one line.</p>
-<h2 id="sample-input-1">Sample Input 1:</h2>
-<p>5<br>
-88 70 61 96 120</p>
-<h2 id="sample-output-1">Sample Output 1:</h2>
-<p>70</p>
-<h2 id="sample-input-2">Sample Input 2:</h2>
-<p>7<br>
-88 70 61 96 120 90 65</p>
-<h2 id="sample-output-2">Sample Output 2:</h2>
-<p>88</p>
-<h1 id="solution">Solution:</h1>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-
-using namespace std;
-
-typedef struct node
-{
-    int data,height;
-    node *lchild,*rchild;
-}node;
-
-int getheight(node* k)
-{
-    if(k==nullptr)
-        return 0;
-    else return k-&gt;height;
-}
-
-node* l_rotate(node* &amp;k1)
-{
-    node *k2=k1-&gt;rchild;
-
-    k1-&gt;rchild=k2-&gt;lchild;
-    k2-&gt;lchild=k1;
-    k1-&gt;height=max(getheight(k1-&gt;lchild),getheight(k1-&gt;rchild))+1;
-    k2-&gt;height=max(getheight(k2-&gt;lchild),getheight(k2-&gt;rchild))+1;
-    return k2;
-}
-
-node* r_rotate(node* &amp;k1)
-{
-    node *k2=k1-&gt;lchild;
-
-    k1-&gt;lchild=k2-&gt;rchild;
-    k2-&gt;rchild=k1;
-    k1-&gt;height=max(getheight(k1-&gt;rchild),getheight(k1-&gt;lchild))+1;
-    k2-&gt;height=max(getheight(k2-&gt;rchild),getheight(k2-&gt;lchild))+1;
-    return k2;
-}
-
-node* lr_rotate(node* &amp;k1)
-{
-    k1-&gt;lchild=l_rotate(k1-&gt;lchild);
-    return r_rotate(k1);
-}
-
-node* rl_rotate(node* &amp;k1)
-{
-    k1-&gt;rchild=r_rotate(k1-&gt;rchild);
-    return l_rotate(k1);
-}
-
-node* insertnode(int d,node* &amp;root)
-{
-    if(root==nullptr)
-    {
-        root=(node*)malloc(sizeof(node));
-        root-&gt;data=d;
-        root-&gt;lchild=nullptr;
-        root-&gt;rchild=nullptr;
-        root-&gt;height=0;
-    }
-    else if(d&lt;root-&gt;data)
-    {
-        root-&gt;lchild=insertnode(d,root-&gt;lchild);
-        if(getheight(root-&gt;lchild)-getheight(root-&gt;rchild)==2)
-        {
-            if(d&lt;root-&gt;lchild-&gt;data)
-            {
-                root=r_rotate(root);
-            }
-            else
-            {
-                root=lr_rotate(root);
-            }
-        }
-    }
-    else if(d&gt;root-&gt;data)
-    {
-        root-&gt;rchild=insertnode(d,root-&gt;rchild);
-        if(getheight(root-&gt;rchild)-getheight(root-&gt;lchild)==2)
-        {
-            if(d&gt;root-&gt;rchild-&gt;data)
-            {
-                root=l_rotate(root);
-            }
-            else
-            {
-                root=rl_rotate(root);
-            }
-        }
-    }
-    root-&gt;height=max(getheight(root-&gt;lchild),getheight(root-&gt;rchild))+1;
-    return root;
-}
-
-int main()
-{
-    int n;
-    cin&gt;&gt;n;
-    node *root=nullptr;
-    for(int i=0;i&lt;n;i++)
-    {
-        int tmp;
-        scanf(&quot;%d&quot;,&amp;tmp);
-        root=insertnode(tmp,root);
-    }
-    printf(&quot;%d&quot;,root-&gt;data);
-    return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Welcome to My World]]></title>
-        <id>https://wangfengyi0228.github.io/post/hello-gridea/</id>
-        <link href="https://wangfengyi0228.github.io/post/hello-gridea/">
-        </link>
-        <updated>2000-02-28T14:45:00.000Z</updated>
-        <content type="html"><![CDATA[<p>2000-02-28  Student ，  XMU</p>
-<p>👏 欢迎来到我的blog ！持续建设ing<br>
-✍️ 记录我的笔记、生活、心情... ...<br>
-🤙 不要问我为什么图文不符，因为我愿意😋</p>
-<p>🎓 想要了解更多或联系博主请查看关于<br>
-🕙 想要按时间检索文章请查看归档<br>
-📑 想要按tag检索文章请查看标签<br>
-🔝右上角有导航栏哦</p>
-<p>🌱 当然 wfy 还有很多不足，但请相信我会不停向前 🏃</p>
-<p>😎 Enjoy~</p>
-<p>2021.9.19 | 更新了标签检索功能<br>
-2021.9.21 | 尝试添加评论功能失败，因为disqus被墙了😭，小王还在努力中<br>
-2021.9.27 | 新增网站访客统计及访问量统计功能<br>
-2021.9.28 | 新增文章阅读量统计功能<br>
-2021.10.2 | 新增Katex渲染，可以用markdown写公式啦</p>
-]]></content>
-    </entry>
-</feed>
+  </body>
+</html>
