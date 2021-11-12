@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Practice | Count number of binary strings without consecutive 1’s | one in a million</title>
+<title>ML | 手推BP算法 | one in a million</title>
 <meta name="description" content="我在你的心里，有没有一点特别">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,18 +80,18 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/practice-or-count-number-of-binary-strings-without-consecutive-1s.jpg')">
+            <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/ml-or-shou-tui-bp-suan-fa.jpg')">
             </div>
           
-          <h2 class="post-title">Practice | Count number of binary strings without consecutive 1’s</h2>
+          <h2 class="post-title">ML | 手推BP算法</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2021-03-16</span>
+            <span><i class="icon-calendar-outline"></i> 2021-10-13</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://wangfengyi0228.github.io/tag/yhXS20aRT/">
-                    Algorithm
+                  <a href="https://wangfengyi0228.github.io/tag/WBQki2hdM/">
+                    Machine Learning
                     
                   </a>
                 
@@ -99,62 +99,17 @@
             
           </div>
           <div class="post-content">
-            <p>Given a positive integer n(3≤n≤90), count all possible distinct binary strings of length n such that there are no consecutive 1's .</p>
-<h2 id="sample-input-1">Sample Input 1:</h2>
-<p>2</p>
-<h2 id="sample-output-1">Sample Output 1:</h2>
-<p>3 // The 3 strings are 00, 01, 10</p>
-<h2 id="sample-input-2">Sample Input 2:</h2>
-<p>3</p>
-<h2 id="sample-output-2">Sample Output 2:</h2>
-<p>5 // The 5 strings are 000, 001, 010, 100, 101</p>
-<h1 id="solution">Solution:</h1>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-
-using namespace std;
-
-int pao(int n)
-{
-    if(n==1)
-    {
-        return 2;
-    }
-    else if(n==2)
-    {
-        return 3;
-    }
-    else
-    {
-        return pao(n-1)+pao(n-2);
-    }
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    int dp[100][2];
-    dp[1][0]=1;
-    dp[1][1]=1;
-    for(int i=2;i&lt;=n;i++)
-    {
-        dp[i][0]=dp[i-1][0]+dp[i-1][1];
-        dp[i][1]=dp[i-1][0];
-    }
-    printf(&quot;%d\n&quot;,dp[n][0]+dp[n][1]);
-    printf(&quot;%d\n&quot;,pao(n));
-    return 0;
-}
-</code></pre>
+            <p><img src="https://wangfengyi0228.github.io/post-images/1636714022094.jpg" alt="" loading="lazy"><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714034678.png" alt="" loading="lazy"></p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://wangfengyi0228.github.io/post/od-or-yolo/">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/qt-or-zhi-neng-xun-jian-ji-qi-ren-xiang-mu/">
               <h3 class="post-title">
-                下一篇：OD | YOLO
+                下一篇：Qt | 智能巡检机器人项目
               </h3>
             </a>
           </div>

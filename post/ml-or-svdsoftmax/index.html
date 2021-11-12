@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Practice | Count number of binary strings without consecutive 1’s | one in a million</title>
+<title>ML | SVD、Softmax | one in a million</title>
 <meta name="description" content="我在你的心里，有没有一点特别">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,81 +80,37 @@
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/practice-or-count-number-of-binary-strings-without-consecutive-1s.jpg')">
+            <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/ml-or-svdsoftmax.jpg')">
             </div>
           
-          <h2 class="post-title">Practice | Count number of binary strings without consecutive 1’s</h2>
+          <h2 class="post-title">ML | SVD、Softmax</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2021-03-16</span>
-            
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://wangfengyi0228.github.io/tag/yhXS20aRT/">
-                    Algorithm
-                    
-                  </a>
-                
-              </span>
+            <span><i class="icon-calendar-outline"></i> 2019-09-09</span>
             
           </div>
           <div class="post-content">
-            <p>Given a positive integer n(3≤n≤90), count all possible distinct binary strings of length n such that there are no consecutive 1's .</p>
-<h2 id="sample-input-1">Sample Input 1:</h2>
-<p>2</p>
-<h2 id="sample-output-1">Sample Output 1:</h2>
-<p>3 // The 3 strings are 00, 01, 10</p>
-<h2 id="sample-input-2">Sample Input 2:</h2>
-<p>3</p>
-<h2 id="sample-output-2">Sample Output 2:</h2>
-<p>5 // The 5 strings are 000, 001, 010, 100, 101</p>
-<h1 id="solution">Solution:</h1>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-
-using namespace std;
-
-int pao(int n)
-{
-    if(n==1)
-    {
-        return 2;
-    }
-    else if(n==2)
-    {
-        return 3;
-    }
-    else
-    {
-        return pao(n-1)+pao(n-2);
-    }
-}
-
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;,&amp;n);
-    int dp[100][2];
-    dp[1][0]=1;
-    dp[1][1]=1;
-    for(int i=2;i&lt;=n;i++)
-    {
-        dp[i][0]=dp[i-1][0]+dp[i-1][1];
-        dp[i][1]=dp[i-1][0];
-    }
-    printf(&quot;%d\n&quot;,dp[n][0]+dp[n][1]);
-    printf(&quot;%d\n&quot;,pao(n));
-    return 0;
-}
-</code></pre>
+            <h1 id="1奇异值分解svd">1.奇异值分解（SVD）</h1>
+<p>SVD是将一个矩阵分解成两个正交矩阵和一个对角矩阵，正交矩阵对应的变换是旋转变换，对角矩阵对应的变换是伸缩变换。特征分解只适用于方阵的情况，但是对于不是方阵的矩阵，需要用SVD算法在降维时进行特征分解。假设定义矩阵A的SVD为：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714424716.png" alt="" loading="lazy"><br>
+其中U是一个m×m的矩阵；Σ是一个m×n的矩阵，且除了主对角线上的元素以外，其余的元素均为零，其中主对角线上每个元素都称为奇异值。V是一个n×n的矩阵。U和V都是酉矩阵。如下图所示，其中r为矩阵A的秩。<br>
+转换为数学公式即为：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714445543.png" alt="" loading="lazy"><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714451207.png" alt="" loading="lazy"></p>
+<h1 id="2softmax">2.Softmax</h1>
+<p>softmax是个非常常用而且比较重要的函数，尤其在多分类的场景中使用广泛。它把一些输入映射为0-1之间的实数，并且归一化保证和为1，因此多分类的概率之和也刚好为1。<br>
+假设有一个数组V，Vi表示V中的第i个元素，那么这个元素的softmax值为:<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714485279.png" alt="" loading="lazy"><br>
+如下图所示，softmax将原来的输出3,1,-3，映射成为(0,1)的值，而这些值的累和为1（满足概率的性质），那么就可以将它理解成概率，在最后选取输出结点的时候，就可以选取概率最大（也就是值对应最大的）结点，作为预测目标。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636714496779.png" alt="" loading="lazy"></p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://wangfengyi0228.github.io/post/od-or-yolo/">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/ml-or-zhi-chi-xiang-liang-ji-sv/">
               <h3 class="post-title">
-                下一篇：OD | YOLO
+                下一篇：ML | 支持向量机（SVM）
               </h3>
             </a>
           </div>
