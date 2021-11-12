@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangfengyi0228.github.io</id>
     <title>one in a million</title>
-    <updated>2021-11-12T06:08:38.454Z</updated>
+    <updated>2021-11-12T09:05:59.867Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangfengyi0228.github.io"/>
     <link rel="self" href="https://wangfengyi0228.github.io/atom.xml"/>
@@ -10,131 +10,6 @@
     <logo>https://wangfengyi0228.github.io/images/avatar.png</logo>
     <icon>https://wangfengyi0228.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, one in a million</rights>
-    <entry>
-        <title type="html"><![CDATA[OD | YOLO]]></title>
-        <id>https://wangfengyi0228.github.io/post/od-or-yolo/</id>
-        <link href="https://wangfengyi0228.github.io/post/od-or-yolo/">
-        </link>
-        <updated>2021-11-12T04:47:44.000Z</updated>
-        <content type="html"><![CDATA[<p>参考文献</p>
-<ul>
-<li>[1]Redmon J , Divvala S , Girshick R , et al. You Only Look Once: Unified, Real-Time Object Detection[C]// Computer Vision &amp; Pattern Recognition. IEEE, 2016.</li>
-<li>[2]Redmon J , Farhadi A . YOLO9000: Better, Faster, Stronger[C]// IEEE Conference on Computer Vision &amp; Pattern Recognition. IEEE, 2017:6517-6525.</li>
-<li>[3]Redmon J , Farhadi A . YOLOv3: An Incremental Improvement[J]. arXiv e-prints, 2018.</li>
-<li>[4]Bochkovskiy A , Wang C Y , Liao H Y M . YOLOv4: Optimal Speed and Accuracy of Object Detection[J]. 2020.</li>
-</ul>
-<h1 id="1yolov1">1.YOLOv1</h1>
-<p><strong>1.1 概述</strong><br>
-人类的视觉系统快而准确，只要看一眼图像就能知道图像中有什么物体，以及它们之间的相互关系。YOLO（You Only Look Once: Unified, Real-Time Object Detection）正是为了能够进行这样快速、准确的目标检测而诞生的，它创造性地将边界框和类别两个过程合二为一。与基于滑动窗口和region proposal的R-CNN、Fast R-CNN等算法不同，<code>YOLO训练和检测均是在一个单独网络中进行，没有求取region proposal的过程，而是将目标检测作为回归问题求解，基于一个单独的end-to-end网络，完成从原始图像的输入到物体位置和类别的输出。</code><br>
-YOLO首先将图片分成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>∗</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">S*S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>个大小相同的grid，然后让每个grid预测出B个bounding boxes，每个边界框预测一个物体的中心位置(x,y)、高(h)、宽(w)，以及这次预测的置信度，每个grid识别出一种物体。若分类器可以识别C种不同的物体，那么预测结果总共有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>∗</mo><mi>S</mi><mo>∗</mo><mo>(</mo><mi>B</mi><mo>∗</mo><mn>5</mn><mo>+</mo><mi>C</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">S*S*(B*5+C)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mclose">)</span></span></span></span>个张量。<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695019326.png" alt="" loading="lazy"><br>
-上图展示了图像的分割过程，以及每一个grid预测出的bounding boxes的情况。YOLO的网络结构包括24个卷积层和2个全连接层，其中，卷积层用来提取图像特征，全连接层用来预测图像位置和类别概率值。YOLO网络借鉴了GoogLeNet分类网络结构。不同的是，YOLO未使用inception module，而是使用1x1卷积层（此处1x1卷积层的存在是为了跨通道信息整合）+3x3卷积层简单替代。<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695041225.png" alt="" loading="lazy"><br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695047630.png" alt="" loading="lazy"><br>
-第一项是物体中心坐标的损失函数，使用的是简单的均方误差；第二项是高和宽的损失函数，使用了平方根的均方误差，是为了使模型对较大的和较小的物体同样敏感，反映出大box中的小偏差比小box中的小偏差更重要。第三项是边框内有对象时的置信度误差，第四项是边框内无对象时的置信度误差，第五项是对象分类误差。<br>
-在计算IOU误差时，包含物体的grid与不包含物体的grid，二者的IOU误差对网络loss的贡献值是不同的。两者若采用相同的权值，那么不包含物体的格子的confidence值近似为0，变相放大了包含物体的grid的confidence误差在计算网络参数梯度时的影响，可能会导致模型不稳定。为解决这一问题，YOLO的做法是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi><msub><mi>λ</mi><mrow><mi>c</mi><mi>o</mi><mi>o</mi><mi>r</mi><mi>d</mi></mrow></msub><mo>=</mo><mn>5</mn><mi>a</mi><mi>n</mi><mi>d</mi><msub><mi>λ</mi><mrow><mi>n</mi><mi>o</mi><mi>o</mi><mi>b</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">set \lambda _{coord}=5 and \lambda _{noobj}=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord"><span class="mord mathdefault">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord">5</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord"><span class="mord mathdefault">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">b</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>来进行修正。<br>
-<strong>1.2 YOLOv1的优点</strong><br>
-YOLO将识别与定位合二为一，结构简洁，检测速度快。相对于R-CNN系列, YOLO的整个流程中都能看到整张图像的信息，因此它在检测物体时能很好的利用上下文信息，从而不容易在背景上预测出错误的物体信息。同时YOLO可以学习到高度泛化的特征，能将一个域上学到的特征迁移到不同但相关的域上，如在自然图像上做训练的YOLO，在艺术图片上可以得到较好的测试结果。</p>
-<p><strong>1.3 YOLOv1的缺点</strong><br>
-YOLOv1中一个grid只能识别出一种物体，且bounding box的预测准确度不如R-CNN等Region-based方法，其对小物体的检测，尤其是对密集的小物体检测效果较差。</p>
-<h1 id="2yolov2">2.YOLOv2</h1>
-<p>作者首先在YOLOv1的基础上提出了改进的YOLOv2，然后提出了一种检测与分类联合训练的方法，使用这种联合训练方法在COCO检测数据集和ImageNet分类数据集上训练出了YOLO9000模型，其可以检测超过9000多类物体。<br>
-<strong>2.1 YOLOv2的改进策略</strong><br>
-YOLOv1虽然检测速度很快，但是在检测精度上却不如R-CNN系检测方法，YOLOv1在物体定位方面不够准确，并且召回率较低。YOLOv2共提出了几种改进策略来提升YOLO模型的定位准确度和召回率，从而提高mAP，YOLOv2在改进中遵循一个原则：保持检测速度，这也是YOLO模型的一大优势。</p>
-<ul>
-<li>
-<p>(1)Batch Normalization<br>
-Batch Normalization有助于规范化模型，可以提升模型的收敛速度，而且可以起到一定的正则化效果，降低模型的过拟合。<code>在YOLOv2中，每个卷积层后面都添加了Batch Normalization层，并且不再使用droput。</code>使用Batch Normalization后，YOLOv2的mAP提升了2.4%。</p>
-</li>
-<li>
-<p>(2)High Resolution Classifier<br>
-目前大部分的检测模型都会在先在ImageNet分类数据集上预训练模型的主体部分，大多数分类器操作的输入图像小于256×256，分辨率相对较低，不利于检测模型。所以YOLOv1在采用224×224分类模型预训练后，将分辨率增加至448×448。但是直接切换分辨率，检测模型可能难以快速适应高分辨率。<code>所以YOLOv2增加了在ImageNet数据集上使用448×448的分辨率对分类网络进行10个epoch的精细调整，这给了网络时间来调整它的过滤器，以更好地工作在更高分辨率的输出，</code>然后在检测时对对得到的网络进行微调，可以使得模型适用高分辨率输入。使用高分辨率分类器后，YOLOv2的mAP提升了约4%。</p>
-</li>
-<li>
-<p>(3)Convolutional With Anchor Boxes<br>
-YOLOv1识别精度低的其中一个原因就是边界框的宽与高的确定存在问题。YOLOv1最后采用的是全连接层直接对边界框进行预测，其中边界框的宽与高是相对整张图片大小的，而由于各个图片中存在不同尺度和长宽比的物体，因此YOLOv1在训练过程中学习适应不同物体的形状是比较困难的，这也导致YOLOv1在精确定位方面表现较差。YOLOv2借鉴了Faster R-CNN中RPN网络的先验框策略。<code>RPN对CNN特征提取器得到的特征图进行卷积来预测每个位置的边界框以及置信度，并且各个位置设置不同尺度和比例的先验框，采用先验框使得模型更容易学习。</code><br>
-所以YOLOv2移除了YOLOv1中的全连接层而采用了卷积和anchor boxes来预测边界框。为了使检测所用的特征图分辨率更高，移除其中的一个pool层。在检测模型中，YOLOv2不是采448×448图片作为输入，而是采用416×416大小。因为YOLOv2模型下采样的步长为32，对于416×416大小的图片，最终得到的特征图大小为13×13，维度是奇数，这样特征图恰好只有一个中心位置。对于一些大物体，它们中心点往往落入图片中心位置，此时使用特征图的一个中心点去预测这些物体的边界框相对容易些。<br>
-使用anchor boxes之后，YOLOv2的mAP有稍微下降，但召回率有所上升。</p>
-</li>
-<li>
-<p>(4)Dimension Clusters<br>
-在Faster R-CNN和SSD中，先验框的长和宽是手动设定的，带有一定的主观性。<code>如果选取的先验框维度比较合适，那么模型更容易学习，从而做出更好的预测。因此，YOLOv2采用k-means聚类方法对训练集中的边界框做了聚类分析。</code>因为设置先验框的主要目的是为了使得预测框与ground truth的IOU更好，所以聚类分析时选用box与聚类中心box之间的IOU值作为距离指标：<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695702119.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>(5) New Network：Darknet-19<br>
-YOLOv2采用了一个新的基础模型（特征提取器），称为Darknet-19，包括19个卷积层和5个maxpooling层，如Table 6所示。Darknet-19与VGG16模型设计原则是一致的，主要采用3<em>3卷积，采用2</em>2的maxpooling层之后，特征图维度降低2倍，而同时将特征图的channles增加两倍。与NIN(Network in Network)类似，Darknet-19最终采用global avgpooling做预测，并且在3<em>3卷积之间使用1</em>1卷积来压缩特征图channles以降低模型计算量和参数。Darknet-19每个卷积层后面同样使用了batch norm层以加快收敛速度，降低模型过拟合。在ImageNet分类数据集上，Darknet-19的top-1准确度为72.9%，top-5准确度为91.2%，但是模型参数相对小一些。使用Darknet-19之后，YOLOv2的mAP值没有显著提升，但是计算量却可以减少约33%。<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695596885.png" alt="" loading="lazy"></p>
-</li>
-<li>
-<p>(6)Fine-Grained Features<br>
-YOLOv2的输入图片大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>416</mn><mo>∗</mo><mn>416</mn></mrow><annotation encoding="application/x-tex">416*416</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span></span></span></span>，经过5次maxpooling之后得到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">13*13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span>大小的特征图，并以此特征图采用卷积做预测。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">13*13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span>大小的特征图对检测大物体是足够了，但是对于小物体还需要更精细的特征图（Fine-Grained Features）。因此SSD使用了多尺度的特征图来分别检测不同大小的物体，前面更精细的特征图可以用来预测小物体。YOLOv2提出了一种passthrough层来利用更精细的特征图。YOLOv2所利用的Fine-Grained Features是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn></mrow><annotation encoding="application/x-tex">26*26</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span></span></span></span>大小的特征图（最后一个maxpooling层的输入），对于Darknet-19模型来说就是大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn><mo>∗</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">26*26*512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span></span></span></span>的特征图。passthrough层与ResNet网络的shortcut类似，以前面更高分辨率的特征图为输入，然后将其连接到后面的低分辨率特征图上。前面的特征图维度是后面的特征图的2倍，passthrough层抽取前面层的每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>的局部区域，然后将其转化为channel维度，对于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn><mo>∗</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">26*26*512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span></span></span></span>的特征图，经passthrough层处理之后就变成了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>2048</mn></mrow><annotation encoding="application/x-tex">13*13*2048</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">4</span><span class="mord">8</span></span></span></span>的新特征图（特征图大小降低4倍，而channles增加4倍，图6为一个实例），这样就可以与后面的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>1024</mn></mrow><annotation encoding="application/x-tex">13*13*1024</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">2</span><span class="mord">4</span></span></span></span>特征图连接在一起形成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>3072</mn></mrow><annotation encoding="application/x-tex">13*13*3072</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">7</span><span class="mord">2</span></span></span></span>的特征图，然后在此特征图基础上卷积做预测。在YOLO的C源码中，passthrough层称为reorg layer。在TensorFlow中，可以使用tf.extract_image_patches或者tf.space_to_depth来实现passthrough层。<br>
-#3.YOLOv3<br>
-YOLOv3借鉴了一些好的方案融合到YOLO里面，在保持速度优势的前提下，提升了预测精度，尤其是加强了对小物体的识别能力。</p>
-</li>
-<li>
-<p><strong>DBL：</strong> 代码中的Darknetconv2d_BN_Leaky，是yolo_v3的基本组件,就是卷积+BN+Leaky relu。对于v3来说，BN和leaky relu已经是和卷积层不可分离的部分了(最后一层卷积除外)，共同构成了最小组件。</p>
-</li>
-<li>
-<p>**resn： **n代表数字，有res1，res2, … ,res8等等，表示这个res_block里含有多少个res_unit。这是yolo_v3的大组件，yolo_v3开始借鉴了ResNet的残差结构，使用这种结构可以让网络结构更深(从v2的darknet-19上升到v3的darknet-53，前者没有残差结构)。res_block的基本组件也是DBL。</p>
-</li>
-<li>
-<p>**concat： *<em>张量拼接。将darknet中间层和后面的某一层的上采样进行拼接。拼接的操作和残差层add的操作是不一样的，拼接会扩充张量的维度，而add只是直接相加不会导致张量维度的改变。<br>
-<strong>(1)backbone：darknet-53</strong><br>
-为了达到更好的分类效果，作者自己设计训练了darknet-53。作者在ImageNet上实验发现这个darknet-53，的确很强，相对于ResNet-152和ResNet-101，darknet-53不仅在分类精度上差不多，计算速度还比ResNet-152和ResNet-101快得多，网络层数也较少。<code>YOLOv3使用了darknet-53的前面的52层（没有全连接层），yolo_v3这个网络是一个全卷积网络，大量使用残差的跳层连接，并且为了降低池化带来的梯度负面效果，作者直接摒弃了Pooling，用conv的stride来实现降采样。</code>在这个网络结构中，使用的是步长为2的卷积来进行降采样。<br>
-为了加强算法对小目标检测的精确度，YOLO v3中采用类似FPN的upsample和融合做法（最后融合了3个scale，其他两个scale的大小分别是26×26和52×52），在多个scale的feature map上做检测。<br>
-<strong>(2)Output</strong><br>
-yolo v3输出了3个不同尺度的feature map，即predictions across scales，这个借鉴了FPN(feature pyramid networks)<code>采用多尺度来对不同size的目标进行检测，越精细的grid cell就可以检测出越精细的物体。</code>3个尺度的feature mapy1,y2和y3的深度都是255，边长的规律是13:26:52。对于COCO类别而言，有80个种类，所以每个box应该对每个种类都输出一个概率。yolo v3设定的是每个网格单元预测3个box，所以每个box需要有(x, y, w, h, confidence)五个基本参数，然后还要有80个类别的概率，3</em>(5 + 80) = 255。而yolo v1的输出张量是7x7x30，只能识别20类物体，显然YOLOv3改进了许多。<br>
-<strong>(3)Bounding Box</strong><br>
-YOLOv3的Bounding Box由YOLOv2又做出了更好的改进。在YOLOv2和YOLOv3中，都对图像中的object采用了k-means聚类。 feature map中的每一个cell都会预测3个边界框（bounding box），每个bounding box都会预测三个东西：每个框的位置（4个值，中心坐标tx和ty，框的高度bh和宽度bw）、一个objectness prediction 、N个类别，coco数据集80类，voc20类。三次检测，每次对应的感受野不同，适合检测的物体大小不同。<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636695931976.png" alt="" loading="lazy"><br>
-<strong>(4)LOSS Function</strong><br>
-YOLOv3重要改变之一：No more softmaxing the classes。YOLO v3对图像中检测到的对象执行多标签分类。logistic回归用于对anchor包围的部分进行一个目标性评分(objectness score)，即这块位置是目标的可能性有多大。这一步是在predict之前进行的，可以去掉不必要的anchor，减少计算量。不同于faster R-CNN的是，yolo_v3只会对1个prior进行操作，也就是那个最佳prior。而logistic回归就是用来从9个anchor priors中找到objectness score(目标存在可能性得分)最高的那一个。logistic回归就是用曲线对prior相对于 objectness score映射关系的线性建模。</p>
-</li>
-</ul>
-<h1 id="4yolov4">4.YOLOv4</h1>
-<p><strong>(1)Bag of freebies</strong><br>
-在目标检测中Bag of freebies是指：用一些比较有用的训练技巧来训练模型，从而使目标检测器在不增加推理损耗的情况下达到更好的精度。目标检测经常采用这种方法，并符合这个定义的就是数据增强。<code>数据增强的目的是：增加输入图像的可变性，从而使设计的目标检测模型对不同环境的图片具有较高的鲁棒性。</code><br>
-其他的一些Bag of freebies方法是专门解决数据集中的语义分布偏差。在处理语义困扰的问题上，有一个很重要的问题是不同类别之间的数据不平衡，而two-stage 检测器处理这个问题通常是通过hard negative example mining或online hard example mining 。 最后一个bag of freebies是objective function of Bounding Box (BBox) 回归。检测器通常使用MSE对BBOX的中心点和宽高进行回归，至于anchor-based方法，它是为了估算出对应的偏移量。但是，要直接估计BBOX的点坐标值，是要将这些点作为独立变量，但实际上未考虑对象本身的完整性。为了使这一问题得到更好的处理，一些研究人员最近提出的IoU损失，同时考虑预测的BBox面积和ground truth BBox面积覆盖。</p>
-<p><strong>(2)Bag of specials</strong><br>
-Bag of specials是指一些plugin modules（例如特征增强模型，或者一些后处理），这部分增加的计算量很少，但是能有效地增加物体检测的准确率，将这部分称之为Bag of specials。这部分插件模块能够增强网络模型的一些属性，例如增大感受野（ASFF，ASPP，RFB这些模块）、引入注意力机制（spatial attention和channel attention）、增加特征集成能力。后处理算法是指用一些算法来筛选模型预测出来的结果，后处理方法常用的是NMS，它可以用于过滤那些预测错误的BBoxes，并只保留较高的候选BBoxes。</p>
-<p><strong>(3)额外改进</strong><br>
-使用一种新的数据增强方法Mosaic和Self-Adversarial Training (SAT)，前者把四张图拼成一张图来训练，变相的等价于增大了mini-batch；后者是在一张图上，让神经网络反向更新图像，对图像做改变扰动，然后在这个图像上训练。<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636696843641.png" alt="" loading="lazy"><br>
-跨最小批的归一化（Cross mini-batch Normal），在CBN的基础上修改的SAM，从spatial-wise attention修改为point-wise attention：<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636696855738.png" alt="" loading="lazy"><br>
-修改的PAN，把通道从相加（add）改变为concat：<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636696863193.png" alt="" loading="lazy"><br>
-<strong>(4)YOLOv4的组成</strong><br>
-Backbone: CSPDarknet53<br>
-Neck: SPP , PAN<br>
-Head: YOLOv3</p>
-<h1 id="5总结">5.总结</h1>
-<p><strong>(1)YOLOv1</strong></p>
-<ul>
-<li>训练和检测均是在一个单独网络中进行，没有求取region proposal的过程。</li>
-<li>将目标检测作为回归问题求解，基于一个单独的end-to-end网络。</li>
-<li>损失函数中的几个项与输出向量中的内容相对应。</li>
-<li>YOLOv1检测速度快，但在检测小物体以及密集物体方面存在欠缺。<br>
-<strong>(2)YOLOv2</strong></li>
-<li>YOLOv2在保证检测速度的基础上提出了几种改进策略来提升YOLO模型的定位准确度和召回率。</li>
-<li>网络结构中每个卷积层后面都添加了Batch Normalization层，并且使用高了分辨率分类器。</li>
-<li>YOLOv2采用k-means聚类方法对训练集中的边界框做了聚类分析，使得选取的先验框维度更合适，模型更容易学习，从而做出更好的预测。<br>
-<strong>(3)YOLOv3</strong></li>
-<li>YOLOv3借鉴了一些好的方案融合到YOLO里面，在保持速度优势的前提下，提升了预测精度，尤其是加强了对小物体的识别能力。</li>
-<li>Darknetconv2d_BN_Leaky是yolo_v3的基本组件,就是卷积+BN+Leaky relu。</li>
-<li>YOLOv3开始借鉴了ResNet的残差结构，使用这种结构可以让网络结构更深。</li>
-<li>yolo v3输出了3个不同尺度的feature map，采用多尺度来对不同size的目标进行检测，越精细的grid cell就可以检测出越精细的物体。</li>
-<li>YOLOv3的Bounding Box由YOLOv2又做出了更好的改进。在YOLOv2和YOLOv3中，都对图像中的object采用了k-means聚类。 feature map中的每一个cell都会预测3个边界框。三次检测，每次对应的感受野不同，适合检测的物体大小不同。<br>
-<strong>(4)YOLOv4</strong></li>
-<li>YOLOv4研究设计了一个简单且高效的目标检测算法，该算法降低了训练门槛，使得普通人员在拥有一块1080TI或者2080TI的情况下就能够训练一个super fast and accurate 的目标检测器。</li>
-<li>在训练过程中，验证了最新的Bag-of-Freebies和Bag-of-Specials对Yolo-V4的影响。</li>
-<li>简化以及优化了一些最新提出的算法，包括（CBN，PAN，SAM），从而使Yolo-V4能够在一块GPU上就可以训练起来。</li>
-</ul>
-<p>YOLOv5初步移植到手机后的效果图：<br>
-<img src="https://wangfengyi0228.github.io/post-images/1636696976292.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Qt | 智能巡检机器人项目]]></title>
         <id>https://wangfengyi0228.github.io/post/qt-or-zhi-neng-xun-jian-ji-qi-ren-xiang-mu/</id>
@@ -451,6 +326,131 @@ int main()
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[OD | YOLO]]></title>
+        <id>https://wangfengyi0228.github.io/post/od-or-yolo/</id>
+        <link href="https://wangfengyi0228.github.io/post/od-or-yolo/">
+        </link>
+        <updated>2020-12-28T04:47:44.000Z</updated>
+        <content type="html"><![CDATA[<p>参考文献</p>
+<ul>
+<li>[1]Redmon J , Divvala S , Girshick R , et al. You Only Look Once: Unified, Real-Time Object Detection[C]// Computer Vision &amp; Pattern Recognition. IEEE, 2016.</li>
+<li>[2]Redmon J , Farhadi A . YOLO9000: Better, Faster, Stronger[C]// IEEE Conference on Computer Vision &amp; Pattern Recognition. IEEE, 2017:6517-6525.</li>
+<li>[3]Redmon J , Farhadi A . YOLOv3: An Incremental Improvement[J]. arXiv e-prints, 2018.</li>
+<li>[4]Bochkovskiy A , Wang C Y , Liao H Y M . YOLOv4: Optimal Speed and Accuracy of Object Detection[J]. 2020.</li>
+</ul>
+<h1 id="1yolov1">1.YOLOv1</h1>
+<p><strong>1.1 概述</strong><br>
+人类的视觉系统快而准确，只要看一眼图像就能知道图像中有什么物体，以及它们之间的相互关系。YOLO（You Only Look Once: Unified, Real-Time Object Detection）正是为了能够进行这样快速、准确的目标检测而诞生的，它创造性地将边界框和类别两个过程合二为一。与基于滑动窗口和region proposal的R-CNN、Fast R-CNN等算法不同，<code>YOLO训练和检测均是在一个单独网络中进行，没有求取region proposal的过程，而是将目标检测作为回归问题求解，基于一个单独的end-to-end网络，完成从原始图像的输入到物体位置和类别的输出。</code><br>
+YOLO首先将图片分成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>∗</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">S*S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>个大小相同的grid，然后让每个grid预测出B个bounding boxes，每个边界框预测一个物体的中心位置(x,y)、高(h)、宽(w)，以及这次预测的置信度，每个grid识别出一种物体。若分类器可以识别C种不同的物体，那么预测结果总共有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>∗</mo><mi>S</mi><mo>∗</mo><mo>(</mo><mi>B</mi><mo>∗</mo><mn>5</mn><mo>+</mo><mi>C</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">S*S*(B*5+C)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">5</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mclose">)</span></span></span></span>个张量。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695019326.png" alt="" loading="lazy"><br>
+上图展示了图像的分割过程，以及每一个grid预测出的bounding boxes的情况。YOLO的网络结构包括24个卷积层和2个全连接层，其中，卷积层用来提取图像特征，全连接层用来预测图像位置和类别概率值。YOLO网络借鉴了GoogLeNet分类网络结构。不同的是，YOLO未使用inception module，而是使用1x1卷积层（此处1x1卷积层的存在是为了跨通道信息整合）+3x3卷积层简单替代。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695041225.png" alt="" loading="lazy"><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695047630.png" alt="" loading="lazy"><br>
+第一项是物体中心坐标的损失函数，使用的是简单的均方误差；第二项是高和宽的损失函数，使用了平方根的均方误差，是为了使模型对较大的和较小的物体同样敏感，反映出大box中的小偏差比小box中的小偏差更重要。第三项是边框内有对象时的置信度误差，第四项是边框内无对象时的置信度误差，第五项是对象分类误差。<br>
+在计算IOU误差时，包含物体的grid与不包含物体的grid，二者的IOU误差对网络loss的贡献值是不同的。两者若采用相同的权值，那么不包含物体的格子的confidence值近似为0，变相放大了包含物体的grid的confidence误差在计算网络参数梯度时的影响，可能会导致模型不稳定。为解决这一问题，YOLO的做法是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi><msub><mi>λ</mi><mrow><mi>c</mi><mi>o</mi><mi>o</mi><mi>r</mi><mi>d</mi></mrow></msub><mo>=</mo><mn>5</mn><mi>a</mi><mi>n</mi><mi>d</mi><msub><mi>λ</mi><mrow><mi>n</mi><mi>o</mi><mi>o</mi><mi>b</mi><mi>j</mi></mrow></msub><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">set \lambda _{coord}=5 and \lambda _{noobj}=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord"><span class="mord mathdefault">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord">5</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord"><span class="mord mathdefault">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">b</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>来进行修正。<br>
+<strong>1.2 YOLOv1的优点</strong><br>
+YOLO将识别与定位合二为一，结构简洁，检测速度快。相对于R-CNN系列, YOLO的整个流程中都能看到整张图像的信息，因此它在检测物体时能很好的利用上下文信息，从而不容易在背景上预测出错误的物体信息。同时YOLO可以学习到高度泛化的特征，能将一个域上学到的特征迁移到不同但相关的域上，如在自然图像上做训练的YOLO，在艺术图片上可以得到较好的测试结果。</p>
+<p><strong>1.3 YOLOv1的缺点</strong><br>
+YOLOv1中一个grid只能识别出一种物体，且bounding box的预测准确度不如R-CNN等Region-based方法，其对小物体的检测，尤其是对密集的小物体检测效果较差。</p>
+<h1 id="2yolov2">2.YOLOv2</h1>
+<p>作者首先在YOLOv1的基础上提出了改进的YOLOv2，然后提出了一种检测与分类联合训练的方法，使用这种联合训练方法在COCO检测数据集和ImageNet分类数据集上训练出了YOLO9000模型，其可以检测超过9000多类物体。<br>
+<strong>2.1 YOLOv2的改进策略</strong><br>
+YOLOv1虽然检测速度很快，但是在检测精度上却不如R-CNN系检测方法，YOLOv1在物体定位方面不够准确，并且召回率较低。YOLOv2共提出了几种改进策略来提升YOLO模型的定位准确度和召回率，从而提高mAP，YOLOv2在改进中遵循一个原则：保持检测速度，这也是YOLO模型的一大优势。</p>
+<ul>
+<li>
+<p>(1)Batch Normalization<br>
+Batch Normalization有助于规范化模型，可以提升模型的收敛速度，而且可以起到一定的正则化效果，降低模型的过拟合。<code>在YOLOv2中，每个卷积层后面都添加了Batch Normalization层，并且不再使用droput。</code>使用Batch Normalization后，YOLOv2的mAP提升了2.4%。</p>
+</li>
+<li>
+<p>(2)High Resolution Classifier<br>
+目前大部分的检测模型都会在先在ImageNet分类数据集上预训练模型的主体部分，大多数分类器操作的输入图像小于256×256，分辨率相对较低，不利于检测模型。所以YOLOv1在采用224×224分类模型预训练后，将分辨率增加至448×448。但是直接切换分辨率，检测模型可能难以快速适应高分辨率。<code>所以YOLOv2增加了在ImageNet数据集上使用448×448的分辨率对分类网络进行10个epoch的精细调整，这给了网络时间来调整它的过滤器，以更好地工作在更高分辨率的输出，</code>然后在检测时对对得到的网络进行微调，可以使得模型适用高分辨率输入。使用高分辨率分类器后，YOLOv2的mAP提升了约4%。</p>
+</li>
+<li>
+<p>(3)Convolutional With Anchor Boxes<br>
+YOLOv1识别精度低的其中一个原因就是边界框的宽与高的确定存在问题。YOLOv1最后采用的是全连接层直接对边界框进行预测，其中边界框的宽与高是相对整张图片大小的，而由于各个图片中存在不同尺度和长宽比的物体，因此YOLOv1在训练过程中学习适应不同物体的形状是比较困难的，这也导致YOLOv1在精确定位方面表现较差。YOLOv2借鉴了Faster R-CNN中RPN网络的先验框策略。<code>RPN对CNN特征提取器得到的特征图进行卷积来预测每个位置的边界框以及置信度，并且各个位置设置不同尺度和比例的先验框，采用先验框使得模型更容易学习。</code><br>
+所以YOLOv2移除了YOLOv1中的全连接层而采用了卷积和anchor boxes来预测边界框。为了使检测所用的特征图分辨率更高，移除其中的一个pool层。在检测模型中，YOLOv2不是采448×448图片作为输入，而是采用416×416大小。因为YOLOv2模型下采样的步长为32，对于416×416大小的图片，最终得到的特征图大小为13×13，维度是奇数，这样特征图恰好只有一个中心位置。对于一些大物体，它们中心点往往落入图片中心位置，此时使用特征图的一个中心点去预测这些物体的边界框相对容易些。<br>
+使用anchor boxes之后，YOLOv2的mAP有稍微下降，但召回率有所上升。</p>
+</li>
+<li>
+<p>(4)Dimension Clusters<br>
+在Faster R-CNN和SSD中，先验框的长和宽是手动设定的，带有一定的主观性。<code>如果选取的先验框维度比较合适，那么模型更容易学习，从而做出更好的预测。因此，YOLOv2采用k-means聚类方法对训练集中的边界框做了聚类分析。</code>因为设置先验框的主要目的是为了使得预测框与ground truth的IOU更好，所以聚类分析时选用box与聚类中心box之间的IOU值作为距离指标：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695702119.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>(5) New Network：Darknet-19<br>
+YOLOv2采用了一个新的基础模型（特征提取器），称为Darknet-19，包括19个卷积层和5个maxpooling层，如Table 6所示。Darknet-19与VGG16模型设计原则是一致的，主要采用3<em>3卷积，采用2</em>2的maxpooling层之后，特征图维度降低2倍，而同时将特征图的channles增加两倍。与NIN(Network in Network)类似，Darknet-19最终采用global avgpooling做预测，并且在3<em>3卷积之间使用1</em>1卷积来压缩特征图channles以降低模型计算量和参数。Darknet-19每个卷积层后面同样使用了batch norm层以加快收敛速度，降低模型过拟合。在ImageNet分类数据集上，Darknet-19的top-1准确度为72.9%，top-5准确度为91.2%，但是模型参数相对小一些。使用Darknet-19之后，YOLOv2的mAP值没有显著提升，但是计算量却可以减少约33%。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695596885.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>(6)Fine-Grained Features<br>
+YOLOv2的输入图片大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>416</mn><mo>∗</mo><mn>416</mn></mrow><annotation encoding="application/x-tex">416*416</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">1</span><span class="mord">6</span></span></span></span>，经过5次maxpooling之后得到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">13*13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span>大小的特征图，并以此特征图采用卷积做预测。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn></mrow><annotation encoding="application/x-tex">13*13</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span></span></span></span>大小的特征图对检测大物体是足够了，但是对于小物体还需要更精细的特征图（Fine-Grained Features）。因此SSD使用了多尺度的特征图来分别检测不同大小的物体，前面更精细的特征图可以用来预测小物体。YOLOv2提出了一种passthrough层来利用更精细的特征图。YOLOv2所利用的Fine-Grained Features是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn></mrow><annotation encoding="application/x-tex">26*26</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span></span></span></span>大小的特征图（最后一个maxpooling层的输入），对于Darknet-19模型来说就是大小为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn><mo>∗</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">26*26*512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span></span></span></span>的特征图。passthrough层与ResNet网络的shortcut类似，以前面更高分辨率的特征图为输入，然后将其连接到后面的低分辨率特征图上。前面的特征图维度是后面的特征图的2倍，passthrough层抽取前面层的每个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo>∗</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>的局部区域，然后将其转化为channel维度，对于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>26</mn><mo>∗</mo><mn>26</mn><mo>∗</mo><mn>512</mn></mrow><annotation encoding="application/x-tex">26*26*512</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">6</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span><span class="mord">1</span><span class="mord">2</span></span></span></span>的特征图，经passthrough层处理之后就变成了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>2048</mn></mrow><annotation encoding="application/x-tex">13*13*2048</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">4</span><span class="mord">8</span></span></span></span>的新特征图（特征图大小降低4倍，而channles增加4倍，图6为一个实例），这样就可以与后面的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>1024</mn></mrow><annotation encoding="application/x-tex">13*13*1024</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">2</span><span class="mord">4</span></span></span></span>特征图连接在一起形成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>13</mn><mo>∗</mo><mn>13</mn><mo>∗</mo><mn>3072</mn></mrow><annotation encoding="application/x-tex">13*13*3072</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span><span class="mord">0</span><span class="mord">7</span><span class="mord">2</span></span></span></span>的特征图，然后在此特征图基础上卷积做预测。在YOLO的C源码中，passthrough层称为reorg layer。在TensorFlow中，可以使用tf.extract_image_patches或者tf.space_to_depth来实现passthrough层。<br>
+#3.YOLOv3<br>
+YOLOv3借鉴了一些好的方案融合到YOLO里面，在保持速度优势的前提下，提升了预测精度，尤其是加强了对小物体的识别能力。</p>
+</li>
+<li>
+<p><strong>DBL：</strong> 代码中的Darknetconv2d_BN_Leaky，是yolo_v3的基本组件,就是卷积+BN+Leaky relu。对于v3来说，BN和leaky relu已经是和卷积层不可分离的部分了(最后一层卷积除外)，共同构成了最小组件。</p>
+</li>
+<li>
+<p>**resn： **n代表数字，有res1，res2, … ,res8等等，表示这个res_block里含有多少个res_unit。这是yolo_v3的大组件，yolo_v3开始借鉴了ResNet的残差结构，使用这种结构可以让网络结构更深(从v2的darknet-19上升到v3的darknet-53，前者没有残差结构)。res_block的基本组件也是DBL。</p>
+</li>
+<li>
+<p>**concat： *<em>张量拼接。将darknet中间层和后面的某一层的上采样进行拼接。拼接的操作和残差层add的操作是不一样的，拼接会扩充张量的维度，而add只是直接相加不会导致张量维度的改变。<br>
+<strong>(1)backbone：darknet-53</strong><br>
+为了达到更好的分类效果，作者自己设计训练了darknet-53。作者在ImageNet上实验发现这个darknet-53，的确很强，相对于ResNet-152和ResNet-101，darknet-53不仅在分类精度上差不多，计算速度还比ResNet-152和ResNet-101快得多，网络层数也较少。<code>YOLOv3使用了darknet-53的前面的52层（没有全连接层），yolo_v3这个网络是一个全卷积网络，大量使用残差的跳层连接，并且为了降低池化带来的梯度负面效果，作者直接摒弃了Pooling，用conv的stride来实现降采样。</code>在这个网络结构中，使用的是步长为2的卷积来进行降采样。<br>
+为了加强算法对小目标检测的精确度，YOLO v3中采用类似FPN的upsample和融合做法（最后融合了3个scale，其他两个scale的大小分别是26×26和52×52），在多个scale的feature map上做检测。<br>
+<strong>(2)Output</strong><br>
+yolo v3输出了3个不同尺度的feature map，即predictions across scales，这个借鉴了FPN(feature pyramid networks)<code>采用多尺度来对不同size的目标进行检测，越精细的grid cell就可以检测出越精细的物体。</code>3个尺度的feature mapy1,y2和y3的深度都是255，边长的规律是13:26:52。对于COCO类别而言，有80个种类，所以每个box应该对每个种类都输出一个概率。yolo v3设定的是每个网格单元预测3个box，所以每个box需要有(x, y, w, h, confidence)五个基本参数，然后还要有80个类别的概率，3</em>(5 + 80) = 255。而yolo v1的输出张量是7x7x30，只能识别20类物体，显然YOLOv3改进了许多。<br>
+<strong>(3)Bounding Box</strong><br>
+YOLOv3的Bounding Box由YOLOv2又做出了更好的改进。在YOLOv2和YOLOv3中，都对图像中的object采用了k-means聚类。 feature map中的每一个cell都会预测3个边界框（bounding box），每个bounding box都会预测三个东西：每个框的位置（4个值，中心坐标tx和ty，框的高度bh和宽度bw）、一个objectness prediction 、N个类别，coco数据集80类，voc20类。三次检测，每次对应的感受野不同，适合检测的物体大小不同。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636695931976.png" alt="" loading="lazy"><br>
+<strong>(4)LOSS Function</strong><br>
+YOLOv3重要改变之一：No more softmaxing the classes。YOLO v3对图像中检测到的对象执行多标签分类。logistic回归用于对anchor包围的部分进行一个目标性评分(objectness score)，即这块位置是目标的可能性有多大。这一步是在predict之前进行的，可以去掉不必要的anchor，减少计算量。不同于faster R-CNN的是，yolo_v3只会对1个prior进行操作，也就是那个最佳prior。而logistic回归就是用来从9个anchor priors中找到objectness score(目标存在可能性得分)最高的那一个。logistic回归就是用曲线对prior相对于 objectness score映射关系的线性建模。</p>
+</li>
+</ul>
+<h1 id="4yolov4">4.YOLOv4</h1>
+<p><strong>(1)Bag of freebies</strong><br>
+在目标检测中Bag of freebies是指：用一些比较有用的训练技巧来训练模型，从而使目标检测器在不增加推理损耗的情况下达到更好的精度。目标检测经常采用这种方法，并符合这个定义的就是数据增强。<code>数据增强的目的是：增加输入图像的可变性，从而使设计的目标检测模型对不同环境的图片具有较高的鲁棒性。</code><br>
+其他的一些Bag of freebies方法是专门解决数据集中的语义分布偏差。在处理语义困扰的问题上，有一个很重要的问题是不同类别之间的数据不平衡，而two-stage 检测器处理这个问题通常是通过hard negative example mining或online hard example mining 。 最后一个bag of freebies是objective function of Bounding Box (BBox) 回归。检测器通常使用MSE对BBOX的中心点和宽高进行回归，至于anchor-based方法，它是为了估算出对应的偏移量。但是，要直接估计BBOX的点坐标值，是要将这些点作为独立变量，但实际上未考虑对象本身的完整性。为了使这一问题得到更好的处理，一些研究人员最近提出的IoU损失，同时考虑预测的BBox面积和ground truth BBox面积覆盖。</p>
+<p><strong>(2)Bag of specials</strong><br>
+Bag of specials是指一些plugin modules（例如特征增强模型，或者一些后处理），这部分增加的计算量很少，但是能有效地增加物体检测的准确率，将这部分称之为Bag of specials。这部分插件模块能够增强网络模型的一些属性，例如增大感受野（ASFF，ASPP，RFB这些模块）、引入注意力机制（spatial attention和channel attention）、增加特征集成能力。后处理算法是指用一些算法来筛选模型预测出来的结果，后处理方法常用的是NMS，它可以用于过滤那些预测错误的BBoxes，并只保留较高的候选BBoxes。</p>
+<p><strong>(3)额外改进</strong><br>
+使用一种新的数据增强方法Mosaic和Self-Adversarial Training (SAT)，前者把四张图拼成一张图来训练，变相的等价于增大了mini-batch；后者是在一张图上，让神经网络反向更新图像，对图像做改变扰动，然后在这个图像上训练。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636696843641.png" alt="" loading="lazy"><br>
+跨最小批的归一化（Cross mini-batch Normal），在CBN的基础上修改的SAM，从spatial-wise attention修改为point-wise attention：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636696855738.png" alt="" loading="lazy"><br>
+修改的PAN，把通道从相加（add）改变为concat：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636696863193.png" alt="" loading="lazy"><br>
+<strong>(4)YOLOv4的组成</strong><br>
+Backbone: CSPDarknet53<br>
+Neck: SPP , PAN<br>
+Head: YOLOv3</p>
+<h1 id="5总结">5.总结</h1>
+<p><strong>(1)YOLOv1</strong></p>
+<ul>
+<li>训练和检测均是在一个单独网络中进行，没有求取region proposal的过程。</li>
+<li>将目标检测作为回归问题求解，基于一个单独的end-to-end网络。</li>
+<li>损失函数中的几个项与输出向量中的内容相对应。</li>
+<li>YOLOv1检测速度快，但在检测小物体以及密集物体方面存在欠缺。<br>
+<strong>(2)YOLOv2</strong></li>
+<li>YOLOv2在保证检测速度的基础上提出了几种改进策略来提升YOLO模型的定位准确度和召回率。</li>
+<li>网络结构中每个卷积层后面都添加了Batch Normalization层，并且使用高了分辨率分类器。</li>
+<li>YOLOv2采用k-means聚类方法对训练集中的边界框做了聚类分析，使得选取的先验框维度更合适，模型更容易学习，从而做出更好的预测。<br>
+<strong>(3)YOLOv3</strong></li>
+<li>YOLOv3借鉴了一些好的方案融合到YOLO里面，在保持速度优势的前提下，提升了预测精度，尤其是加强了对小物体的识别能力。</li>
+<li>Darknetconv2d_BN_Leaky是yolo_v3的基本组件,就是卷积+BN+Leaky relu。</li>
+<li>YOLOv3开始借鉴了ResNet的残差结构，使用这种结构可以让网络结构更深。</li>
+<li>yolo v3输出了3个不同尺度的feature map，采用多尺度来对不同size的目标进行检测，越精细的grid cell就可以检测出越精细的物体。</li>
+<li>YOLOv3的Bounding Box由YOLOv2又做出了更好的改进。在YOLOv2和YOLOv3中，都对图像中的object采用了k-means聚类。 feature map中的每一个cell都会预测3个边界框。三次检测，每次对应的感受野不同，适合检测的物体大小不同。<br>
+<strong>(4)YOLOv4</strong></li>
+<li>YOLOv4研究设计了一个简单且高效的目标检测算法，该算法降低了训练门槛，使得普通人员在拥有一块1080TI或者2080TI的情况下就能够训练一个super fast and accurate 的目标检测器。</li>
+<li>在训练过程中，验证了最新的Bag-of-Freebies和Bag-of-Specials对Yolo-V4的影响。</li>
+<li>简化以及优化了一些最新提出的算法，包括（CBN，PAN，SAM），从而使Yolo-V4能够在一块GPU上就可以训练起来。</li>
+</ul>
+<p>YOLOv5初步移植到手机后的效果图：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636696976292.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[OD | 术语名词]]></title>
         <id>https://wangfengyi0228.github.io/post/od-or-zhu-yu-ming-ci/</id>
         <link href="https://wangfengyi0228.github.io/post/od-or-zhu-yu-ming-ci/">
@@ -470,6 +470,208 @@ int main()
 查准率（Precision）: TP/(TP + FP);查全率（即各类别 AP 的平均值Recall）: TP/(TP + FN)。二者绘制的曲线称为 P-R 曲线。AP是PR 曲线下面积。mAP即各类AP的平均值，用来衡量目标检测中的识别精度。</p>
 <p><strong>7.感受野（Receptive Field）</strong><br>
 在卷积神经网络中，感受野（Receptive Field）的定义是卷积神经网络每一层输出的特征图（feature map）上的像素点在输入图片上映射的区域大小，即特征图上的一个点对应输入图上的区域。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OD | R-CNN、SPP-net]]></title>
+        <id>https://wangfengyi0228.github.io/post/od-or-r-cnnspp-ne/</id>
+        <link href="https://wangfengyi0228.github.io/post/od-or-r-cnnspp-ne/">
+        </link>
+        <updated>2020-10-28T06:11:03.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="参考文献">参考文献</h1>
+<ul>
+<li>[1]Uijlings J R R, Van De Sande K E A, Gevers T, et al. Selective search for object recognition[J]. International journal of computer vision, 2013, 104(2): 154-171.</li>
+<li>[2]Girshick R , Donahue J , Darrell T , et al. Rich Feature Hierarchies for Accurate Object Detection and Semantic Segmentation[C]// CVPR. IEEE, 2014.</li>
+<li>[3]He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[J]. IEEE transactions on pattern analysis and machine intelligence, 2015, 37(9): 1904-1916<br>
+#1.R-CNN<br>
+R-CNN采取的总体思路是：首先输入一张图片，生成1K~2K个候选区域，对每个候选区域，使用CNN提取特征，接着采用svm算法对各个候选框中的物体进行分类识别，最后使用回归器精细修正候选框位置。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636699933320.png" alt="" loading="lazy"><br>
+<strong>1.1候选框的搜索</strong><br>
+当输入一张图片时，要搜索出所有可能是物体的区域，这个采用的方法是传统文献的算法：selective search for object recognition。<s>这个算法的过程类似于构建赫夫曼树</s>。<br>
+<strong>1.1.1selective search for object recognition</strong><br>
+以往的目标检测的做法主要是基于穷举搜索（Exhaustive Search）：选择一个窗口扫描整张图像，改变窗口的大小，继续扫描整张图像。这种做法是比较原始直观，但改变窗口大小，扫描整张图像，非常耗时。若能过滤掉一些无用的box将会节省大量时间。这就是Selective Search(选择性搜索)的优点。<br>
+选择性搜索(Selective Search)综合了穷举搜索（Exhausticve Search)和分割(Segmentation)的方法，意在找到一些可能的目标位置集合。作者将穷举搜索和分割结合起来，采取组合策略保证搜索的多样性，能够大幅度降低搜索空间，提高程序效率，减小计算量。<br>
+在图像中，同一个物体在像素点尺度上具有一定的相似性，如颜色值相似性、纹理相似性、尺度相似性等等。Selective Search正是利用了同一物体在像素点尺度范围的相似性，不断的去合并一些达到预设相似性阈值的相邻像素点，从而将可能属于同一物体的像素点合并，形成一个区域box。这样将一张图像中所有具有一定相似性的像素点合并，形成一些可能属于同一物体的区域集，作为下一步用来检测的区域集，即可能的目标boxes。</li>
+</ul>
+<p>算法过程：<br>
+(1)输入：彩色图片（三通道）。<br>
+(2)获取初始分割区域R={r1,r2,…,rn}，初始化相似度集合S=∅。<br>
+(3)计算R中两两相邻区域（ri,rj）之间的相似度，将其添加到相似度集合S中。<br>
+(4)从相似度集合S中找出，相似度最大的两个区域ri和rj，将其合并成为一个区域 rt。然后从相似度集合中除去原先与ri和rj相邻区域之间计算的相似度。计算新的rt与其相邻区域（原先与ri或rj相邻的区域）的相似度，将其结果添加的到相似度集合S中。同时将新区域 rt 添加到区域集合R中。迭代直至S为空，即可合并区域的都已合并完。 区域的合并方式类似于哈夫曼树的构造过程，因此称之有层次（hierarchical）。<br>
+(5)获取R中每个区域的Bounding Boxes，这个结果就是图像中物体可能位置的可能结果集合L。</p>
+<p><strong>1.1.2缩放处理</strong><br>
+候选框是矩形的，而且大小各不相同。然而CNN对输入图片的大小是固定的，因此对于每个输入的候选框都需要缩放到固定的大小。缩放共有两种方法。<br>
+(1)各向异性缩放<br>
+无论图片原来的长宽比例，无论它是否扭曲，直接进行缩放，全部缩放到CNN输入的大小277*277，如下图第四列。<br>
+(2)各向同性缩放<br>
+因为图片扭曲后，会对后续CNN的训练精度有影响，于是作者也测试了“各向同性缩放”方案，有两种办法：<br>
+A.直接在原始图片中，把bounding box的边界进行扩展延伸成正方形，然后再进行裁剪；如果已经延伸到了原始图片的外边界，那么就用bounding box中的颜色均值填充(padding)，如下图第二列。<br>
+B.先把bounding box图片裁剪出来，然后用固定的背景颜色填充成正方形图片(背景颜色也是采用bounding box的像素颜色均值)，如下图第三列。<br>
+经过作者一系列实验表明采用padding=16的各向异性变形即下图第二行第三列效果最好，能使mAP提升3-5%。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636699973235.png" alt="" loading="lazy"></p>
+<p><strong>1.2 CNN特征提取</strong><br>
+采用Alexnet网络及其初始参数，学习率=0.01进行预训练。接着采用selective search 搜索出来的候选框，处理到指定大小图片，继续对预训练的CNN模型进行fine-tuning训练。假设要检测的物体类别有N类，需要把预训练阶段的CNN模型的最后一层给替换掉，替换成N+1个输出的神经元(加1表示还有一个背景)，然后这一层直接采用参数随机初始化的方法，其它网络层的参数不变；接着继续做随机梯度下降法SGD训练。开始的时候，SGD学习率选择0.001，在每次训练的时候，batch size大小选择128，其中32个正样本、96个负样本。</p>
+<p><strong>1.3 SVM训练</strong><br>
+为了更好地定义正样本与负样本，作者测试了IOU阈值的各种方案数值0,0.1,0.2,0.3,0.4,0.5。最后通过训练发现，如果选择IOU阈值为0.3效果最好,即当IOU小于0.3的时候，就把它标注为负样本（选择为0时，精度下降了4个百分点，选择0.5时，精度下降了5个百分点）。一旦CNN f7层特征被提取出来，那么将为每个物体类训练一个svm分类器。当用CNN提取2000个候选框时，可以得到2000<em>4096这样的特征向量矩阵，然后只需要把这样的一个矩阵与svm权值矩阵4096</em>N点乘(N为分类类别数目，训练了N个svm，每个svm包好了4096个W)，就可以得到结果了。</p>
+<p><strong>1.4创新点及缺点</strong><br>
+创新点：采用AlexNet CNN网络进行CNN特征提取，为了适应AlexNet网络的输入图像大小，对图片的各种变形方式进行了分析。采用了大样本下的有监督预训练+小样本微调的方式解决小样本难以训练甚至过拟合等问题。<br>
+缺点：步骤繁琐，R-CNN的训练先要fine tuning一个预训练的网络，然后针对每个类别都训练一个SVM分类器，最后还要用对bounding-box进行回归，region proposal也要单独用selective search的方式获得。每张图片的每个region proposal都要做卷积，重复操作太多。时间和内存消耗比较大，在训练SVM和回归的时候需要用网络训练的特征作为输入。</p>
+<h1 id="2spp-net">2.SPP-net</h1>
+<p><strong>2.1概述</strong><br>
+在CNN的训练和测试中存在一个技术问题：目前流行的CNN需要一个固定的输入图像大小（例如224*224），这限制了输入图像的纵横比和比例。当应用于任意大小的图像时，当前的方法大多是通过裁剪或扭曲,将输入图像调整到固定大小。但是裁剪区域可能不包含整个对象，而扭曲的内容可能会导致不必要的几何扭曲。由于内容丢失或失真，识别精度可能会受到影响。此外，一个预先定义的尺度当对象比例变化时可能不适用。固定输入大小忽略了涉及规模的问题。<br>
+那么为什么cnn需要一个固定的输入大小呢？CNN网络可以分解为卷积网络部分以及全连接网络部分。卷积网络的参数主要是卷积核，完全能够适用任意大小的输入，并且能够产生任意大小的输出。但是全连接层部分不同，全连接层部分的参数是神经元对于所有输入的连接权重，也就是说输入尺寸不固定的话，全连接层参数的个数不能固定。<br>
+SPP-net给出的解决方案是，既然只有全连接层需要固定的输入，那么在全连接层前加入一个网络层，使其对任意的输入产生固定的输出即可。SPP-net引入了空间金字塔，其主要思路是对于一副图像分成若干尺度的一些块，然后对于每一块提取特征后融合在一起，这样就可以兼容多个尺度的特征。SPP-net首次将这种思想应用在CNN中，对于卷积层特征也先将其分成不同的尺寸，然后每个尺寸提取一个固定维度的特征，最后拼接这些特征就形成了固定维度的输入。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700002894.png" alt="" loading="lazy"><br>
+从上图可以看出SPP-net和R-CNN的区别，首先是输入不需要放缩或裁剪到指定大小；其次是增加了一个空间金字塔池化层，且每幅图片只需要提取一次特征，这也解决了 R-CNN 重复计算的问题。SPP-net 的思路是由于原图与经过卷积层后得到的特征图在空间位置上存在一定的对应关系，所以只需对整张图像进行一次卷积层特征提取，然后将候选区域在原图的位置映射到卷积层的特征图上得到该候选区域的特征，最后将得到每个候选区域的卷积层特征输入到全连接层进行后续操作。R-CNN 要对每个区域计算卷积，而 SPP-net只需要计算一次卷积，从而节省了大量的计算时间。</p>
+<p><strong>2.2网络结构</strong><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700019764.png" alt="" loading="lazy"><br>
+空间金字塔池化层的网络结构如上图所示，SPP-net在conv5层得到的特征图是256层，每层都做一次spatial pyramid pooling。先把每个特征图分割成多个不同尺寸的网格，比如网格分别为4<em>4、2</em>2、1<em>1,然后每个网格做max pooling，这样256层特征图就形成了16</em>256，4<em>256，1</em>256维特征，他们连起来就形成了一个固定长度为(4<em>4+2</em>2+1)*256 维的的特征向量，将这个向量输入到后面的全连接层。</p>
+<p><strong>2.3优势与不足</strong><br>
+SPP-net对R-CNN最大的改进就是特征提取步骤做了修改，特征提取不再需要每个候选区域都经过CNN，只需要将整张图片输入到CNN就可以了，只需要进行一次卷积层特征提取，和R-CNN相比，速度提高了百倍。<br>
+然而和RCNN一样，SPP也需要训练CNN提取特征，然后训练SVM分类这些特征。需要巨大的存储空间，并且分开训练或参数微调也很复杂。而且selective search的方法提取特征是在CPU上进行的，相对于GPU来说还是比较慢的。</p>
+<h1 id="3总结">3.总结</h1>
+<p><strong>(1)R-CNN</strong><br>
+R-CNN首次将CNN引入目标检测，其整体流程框架如下图所示：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700063348.png" alt="" loading="lazy"></p>
+<ul>
+<li>
+<p>优点：<br>
+1.为了适应AlexNet网络的输入图像大小，对图片的各种变形方式进行了分析。<br>
+2.采用大样本下有监督预训练+小样本微调的方式解决小样本难以训练甚至过拟合等问题（迁移学习）。</p>
+</li>
+<li>
+<p>缺点：<br>
+1.针对传统CNN需要固定尺寸的输入图像，crop/warp（归一化）产生物体截断或拉伸，会 导致输入CNN的信息丢失。<br>
+2.训练过程太慢，需要对每一个候选区域都输入到cnn中再进行提取特征。<br>
+3.步骤相对较多，需要fine-tune预训练模型、训练SVM分类器、用回归器进行精细的调整。<br>
+4.占用空间大，提取出的特征以及分类器都需要占用额外的空间。<br>
+5.没有对资源进行重复利用，在使用SVM分类和对框进行回归操作的时候cnn模型的参数并没有同步修改。</p>
+</li>
+</ul>
+<p><strong>(2)SPP-Net</strong><br>
+SPP-Net的流程与R-CNN类似，只是在提取特征阶段没有对图像进行crop/warp，而是采用空间金字塔池化(Spatial Pyramid Pooling )替换了全连接层之前的最后一个池化层，如下图所示：</p>
+<figure data-type="image" tabindex="1"><img src="https://wangfengyi0228.github.io/post-images/1636700158157.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>优点：<br>
+1.取消了crop/warp图像归一化过程，解决图像变形导致的信息丢失以及存储问题。<br>
+2.采用空间金字塔池化（SpatialPyramid Pooling ）替换了全连接层之前的最后一个池化层，有效解决了卷积层的重复计算问题。</p>
+</li>
+<li>
+<p>缺点：<br>
+1.同R-CNN一样分开训练CNN和SVM、BB回归器，训练SVM的特征需要提前保存在磁盘需要巨大的存储空间；多段训练实现较复杂。<br>
+2.CNN和SVM的训练独立导致SVM的训练Loss无法更新SPP-Layer之前的卷积层参数，因此即使采用更深的CNN网络进行特征提取，也无法保证SVM分类器的准确率一定能够提升。<br>
+3.使用selective search的方法提取region proposal，是在CPU上进行耗时较长。</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OD | Fast R-CNN、Faster R-CNN]]></title>
+        <id>https://wangfengyi0228.github.io/post/od-or-fast-r-cnnfaster-r-cnn/</id>
+        <link href="https://wangfengyi0228.github.io/post/od-or-fast-r-cnnfaster-r-cnn/">
+        </link>
+        <updated>2020-10-20T07:48:43.000Z</updated>
+        <content type="html"><![CDATA[<p>#参考文献</p>
+<ul>
+<li>[1]Girshick R . Fast R-CNN[J]. Computer ence, 2015.</li>
+<li>[2]Ren S , He K , Girshick R , et al. Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks[J]. IEEE Transactions on Pattern Analysis &amp; Machine Intelligence, 2017, 39(6):1137-1149.</li>
+</ul>
+<h1 id="1fast-r-cnn">1.Fast R-CNN</h1>
+<p><strong>1.1概述</strong><br>
+Fast R-CNN针对R-CNN以及SPP-net的不足进行了改进，将整个图像和一组object proposals作为输入。该网络首先用几个卷积层和max池化层处理整个图像，以生成feature map。然后，对于每一个object proposal，RoI层从feature map中提取一个固定长度的特征向量。每个特征向量被输入到一系列全连接层中，最后分为两个输出层：一个是分类的输出，另一个层为每个对象类输出四个实值数。每组4个值对其中一个类的精确边界框位置进行编码。为了实现端到端的训练，Fast R-CNN放弃了SVM分类器，而是选择微调后网络自身的softmax分类器。这样一来，特征提取，目标分类、候选框回归三部分可以同时进行端到端（end-to-end）训练。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636706293347.png" alt="" loading="lazy"><br>
+Fast R-CNN的流程图如上图所示，网络有两个输入：图像和对应的region proposal。其中region proposal由selective search方法得到。</p>
+<p><strong>1.2 ROI pooling</strong><br>
+ROI Pooling的作用是对不同大小的region proposal，从最后卷积层输出的feature map中提取大小固定的feature map。可以看做是SPPNet的简化版本，相当于只有一个金字塔层，因为全连接层的输入需要尺寸大小一样，所以不能直接将不同大小的region proposal映射到feature map作为输出，需要做尺寸变换。在文章中，VGG16网络使用H=W=7的参数，即将一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mo>∗</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">h*w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>的region proposal分割成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>H</mi><mo>∗</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">H*W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span></span></span></span>大小的网格，然后将这个region proposal映射到最后一个卷积层输出的feature map，最后计算每个网格里的最大值作为该网格的输出，所以不管ROI pooling之前的feature map大小是多少，ROI pooling后得到的feature map大小都是H*W。</p>
+<p><strong>1.3 SVD分解改进全连接层</strong><br>
+针对object detection，Fast R-CNN在ROI pooling后每个region proposal都要经过几个全连接层，这使得全连接层的计算占网络的计算将近一半，因此采用SVD来简化全连接层的计算。</p>
+<p><strong>1.4优势与缺点</strong><br>
+Fast R-CNN方法主要改进了RCNN的三个问题：一是测试时速度慢，RCNN一张图像内候选框之间大量重叠，提取特征操作冗余。Fast R-CNN对整张图像卷积而不是对每个region proposal卷积，损失函数使用了多任务损失函数(multi-task loss)，ROI Pooling，分类和回归都放在网络一起训练。二是训练时速度慢，Fast R-CNN在训练时，先将一张图像送入网络，紧接着送入从这幅图像上提取出的候选区域。这些候选区域的前几层特征不需要再重复计算。三是训练所需空间大，RCNN中独立的分类器和回归器需要大量特征作为训练样本,Fast R-CNN则把类别判断和位置精调统一用深度网络实现，不再需要额外存储。<br>
+Fast R-CNN的主要缺点在于region proposal的提取仍然使用selective search，目标检测时间大多消耗在这上面。</p>
+<h1 id="2faster-r-cnn">2.Faster R-CNN</h1>
+<p><strong>2.1概述</strong><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636706543622.png" alt="" loading="lazy"><br>
+如上图所示，Faster R-CNN主要可以分为以下四个内容：<br>
+(1)Conv layers：作为一种CNN网络目标检测方法，Faster RCNN首先使用一组基础的conv+relu+pooling层提取image的feature maps。该feature maps被共享用于后续RPN层和全连接层。<br>
+(2)Region Proposal Networks：RPN网络用于生成region proposals。该层通过softmax判断anchors属于positive或者negative，再利用bounding box regression修正anchors获得精确的proposals。<br>
+(3)Roi Pooling：该层收集输入的feature maps和proposals，综合这些信息后提取proposal feature maps，送入后续全连接层判定目标类别。<br>
+(4)Classification：利用proposal feature maps计算proposal的类别，同时再次bounding box regression获得检测框最终的精确位置。</p>
+<p><strong>2.2 Conv layers</strong><br>
+Conv layers包含了conv，pooling，relu三种层。以python版本中的VGG16模型中的faster_rcnn_test.pt的网络结构为例，Conv layers部分共有13个conv层，13个relu层，4个pooling层。在Conv layers中，所有的conv层都是：kernel_size=3，pad=1，stride=1；所有的pooling层都是：kernel_size=2，pad=0，stride=2。在Faster R-CNN的Conv layers中对所有的卷积都做了扩边处理（ pad=1，即填充一圈0），导致原图变为(M+2)<em>(N+2)大小，再做3x3卷积后输出MxN 。正是这种设置，导致Conv layers中的conv层不改变输入和输出矩阵大小。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707304609.png" alt="" loading="lazy"><br>
+Conv layers中的pooling层kernel_size=2，stride=2。这样每个经过pooling层的MxN矩阵，都会变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>M</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo>)</mo><mo>∗</mo><mo>(</mo><mi>N</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">(M/2)*(N/2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span></span></span></span>大小。综上所述，在整个Conv layers中，conv和relu层不改变输入输出大小，只有pooling层使输出长宽都变为输入的1/2。那么，一个MxN大小的矩阵经过Conv layers固定变为(M/16)</em>(N/16)，这样Conv layers生成的feature map中都可以和原图对应起来。</p>
+<p><strong>2.3 Region Proposal Networks(RPN)</strong><br>
+RPN以图像（任何大小）作为输入，并输出一组矩形object proposal，每个object proposal都有一个目标得分。</p>
+<p><strong>2.3.1多通道图像卷积</strong><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707348111.png" alt="" loading="lazy"><br>
+如上图所示，输入有3个通道，同时有2个卷积核。对于每个卷积核，先在输入3个通道分别作卷积，再将3个通道结果加起来得到卷积输出。所以对于某个卷积层，无论输入图像有多少个通道，输出图像通道数总是等于卷积核数量。</p>
+<p><strong>2.3.2 anchors</strong><br>
+Anchors是一个个按照固定比例（长宽、大小）预定义的矩形框，由4个值(x1,x2,y1,y2) 表示矩形左上和右下角点坐标。9个矩形共有3种形状，长宽比为大约为{1:1, 1:2, 1:3}三种，如下图所示。实际上通过anchors就引入了检测中常用到的多尺度方法。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707391850.png" alt="" loading="lazy"><br>
+遍历Conv layers计算获得的feature maps，为每一个点都配备这9种anchors作为初始的检测框。后面有2次bounding box regression可以修正检测框的位置。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707402081.png" alt="" loading="lazy"><br>
+Conv Layers中最后的conv5层num_output=256，对应生成256张特征图，所以feature map每个点都是256-dimensions。在conv5之后，做了rpn_conv/3x3卷积且num_output=256，相当于每个点又融合了周围3x3的空间信息，同时256-d不变。假设在conv5 feature map中每个点上有k个anchor（默认k=9），而每个anhcor要分positive和negative，所以每个点由256d feature转化为cls=2k scores；而每个anchor都有(x, y, w, h)对应4个偏移量，所以reg=4k coordinates<br>
+RPN最终就是在原图尺度上，设置了许多候选Anchor，用cnn去判断哪些Anchor是里面有目标的positive anchor，哪些是没目标的negative ancho，即一个二分类。原图大小为800x600，VGG下采样16倍，feature map每个点设置9个Anchor，所以anchor的个数为ceil(800/16)✖ceil(600/16)✖9=50✖38✖9=17100。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707439696.png" alt="" loading="lazy"><br>
+<strong>2.3.3 softmax判定positive与negative</strong><br>
+一个MxN大小的矩阵送入Faster RCNN网络后，到RPN网络变为(M/16)<em>(N/16)，假设W=M/16，H=N/16。在进入reshape与softmax之前，先做了1x1卷积，如图所示：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707464810.png" alt="" loading="lazy"><br>
+经过该卷积的输出图像为W</em>H<em>18大小，刚好对应了feature maps每一个点都有9个anchors，同时每个anchors又有可能是positive和negative，所有这些信息都保存W</em>H*(9*2)大小的矩阵。后面softmax分类获得的positive anchors，相当于初步提取了检测目标候选区域box（一般认为目标在positive anchors中）。</p>
+<p><strong>2.3.4 对proposals进行bounding box regression</strong><br>
+在RPN的另一条线路中，经过该卷积输出图像为W<em>H</em>36，在caffe blob存储为[1, 4*9, H, W]，相当于feature maps的每个点都有9个anchors，每个anchors又都有4个用于回归的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><msub><mi>d</mi><mi>x</mi></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo separator="true">,</mo><msub><mi>d</mi><mi>y</mi></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo separator="true">,</mo><msub><mi>d</mi><mi>ω</mi></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo separator="true">,</mo><msub><mi>d</mi><mi>h</mi></msub><mo>(</mo><mi>A</mi><mo>)</mo><mo>]</mo></mrow><annotation encoding="application/x-tex">[d_x(A),d_y(A),d_{\omega}(A),d_h(A)]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span><br>
+<strong>2.3.5 Proposal Layer</strong><br>
+Proposal Layer负责综合所有变换量和positive anchors，计算出精准的proposal，送入后续的RoI Pooling Layer。<br>
+Proposal Layer有3个输入：anchors分类器结果rpn_cls_prob_reshape对应的bbox reg的 变换量rpn_bbox_pred；以及im_info；还有参数feat_stride=16。<br>
+对于一副大小为PxQ的图像，传入Faster RCNN前首先reshape到固定的大小<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>∗</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">M*N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span></span>，im_info=[M, N, scale_factor]保存了此次缩放的所有信息。然后经过Conv Layers，经过4次pooling变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi><mo>∗</mo><mi>H</mi><mo>=</mo><mo>(</mo><mi>M</mi><mi mathvariant="normal">/</mi><mn>16</mn><mo>)</mo><mo>∗</mo><mo>(</mo><mi>N</mi><mi mathvariant="normal">/</mi><mn>16</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">W*H=(M/16)*(N/16)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord">/</span><span class="mord">1</span><span class="mord">6</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord">/</span><span class="mord">1</span><span class="mord">6</span><span class="mclose">)</span></span></span></span>大小，其中feature_stride=16保存了该信息，用于计算anchor偏移量。</p>
+<p><strong>2.4 RoI pooling</strong><br>
+RoI Pooling层负责收集proposal，并计算出proposal feature maps，送入后续网络。Rol pooling层有2个输入：原始的feature maps、RPN输出的proposal boxes。</p>
+<p><strong>2.5 Classification</strong><br>
+Classification部分利用已经获得的proposal feature maps，通过全连接层与softmax计算每个proposal具体属于哪个类别，输出cls_prob概率向量；同时再次利用bounding box regression获得每个proposal的位置偏移量bbox_pred，用于回归更加精确的目标检测框。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707589866.png" alt="" loading="lazy"></p>
+<h1 id="3总结">3.总结</h1>
+<p><strong>(1)Fast R-CNN</strong><br>
+Fast R-CNN借鉴了SPP-Net思路，提出了简化版的ROI池化层，同时加入了候选框映射功能，使得网络能够反向传播，并且用Softmax代替了SVM，Smooth L1 Loss取代了Bouding box回归。，采用SVD来简化全连接层的计算。<br>
+其步骤可概括为：先寻找一个在imagenet上训练过的预训练cnn模型；与R-CNN一样，通过selective search在图片中提取2000个候选区域；将一整个图片都输入CNN模型中，提取到图片的整体特征；把候选区域映射到上一步CNN模型提取到的feature map里；采用rol pooling层对每个候选区域的特征进行上采样,从而得到固定大小的feature map,以便输入模型；根据Softmax loss和Smooth L1 Loss对候选区域的特征进行分类和回归调整，回归操作是对于框调整所使用的bounding box。如下图所示：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707627146.png" alt="" loading="lazy"></p>
+<ul>
+<li>
+<p>优点：<br>
+1.直接使用Softmax替代了R-CNN中SVM进行分类，同时在网络中加入了多任务函数边框回归。<br>
+2.将分类和边框回归进行合并，通过多任务Loss层进一步整合深度网络，统一了训练过程， 从而提高了算法准确度。</p>
+</li>
+<li>
+<p>缺点：<br>
+1.region proposal的提取仍然使用selective search，目标检测时间大多消耗在这上面。</p>
+</li>
+</ul>
+<p><strong>(2)Fster R-CNN</strong><br>
+Faster-R-CNN算法由两大模块组成：RPN候选框提取模块和Fast R-CNN检测模块。其中，RPN是全卷积神经网络，用于提取候选框；Fast R-CNN基于RPN提取的region proposal检测并识别proposal中的目标。如下图所示：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707697459.png" alt="" loading="lazy"></p>
+<ul>
+<li>优点：<br>
+1.提出Region Proposal Network（RPN），实现了一个完全的End-To-End的CNN目标检测模型。<br>
+2.共享RPN与Fast R-CNN的特征。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OD | bounding box regression]]></title>
+        <id>https://wangfengyi0228.github.io/post/od-or-bounding-box-regression/</id>
+        <link href="https://wangfengyi0228.github.io/post/od-or-bounding-box-regression/">
+        </link>
+        <updated>2020-10-06T09:02:42.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://wangfengyi0228.github.io/post-images/1636707805394.png" alt="" loading="lazy"><br>
+对于上图，绿色的框表示Ground Truth, 红色的框为Selective Search提取的Region Proposal。那么即便红色的框被分类器识别为飞机，但是由于红色的框定位不准(IoU&lt;0.5)， 那么这张图相当于没有正确的检测出飞机。如果能对红色的框进行微调， 使得经过微调后的窗口跟Ground Truth 更接近，定位就会更准确，Bounding-box regression 就是用来微调这个窗口，使得经过微调后的窗口跟真实边界框更接近。<br>
+以四维向量(x,y,w,h) 表示的Bounding Box为例(即窗口的中心点坐标[x,y]和宽高[w,h])，P=[Px,Py,Pw,Ph]表示原始的Region Proposal，G=[Gx,Gy,Gw,Gh]表示Ground Truth，Bounding-box Regression的目标是寻找一种函数关系f，使得输入原始的窗口 P 经过f映射得到一个跟真实窗口G更接近的回归窗口。即：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707826091.png" alt="" loading="lazy"><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707835026.png" alt="" loading="lazy"><br>
+边界框回归过程图像表示如上图所示，中红色框代表候选目标框，绿色框代表真实目标框，蓝色框代表边界框回归算法预测目标框，红色圆圈代表选候选目标框的中心点，绿色圆圈代表选真实目标框的中心点，蓝色圆圈代表选边界框回归算法预测目标框的中心点。<br>
+R-CNN论文中指出，边界框回归是利用平移变换和尺度变换来实现映射的。平移变换的计算公式如下：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707858555.png" alt="" loading="lazy"><br>
+尺度变换的计算公式如下：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707864727.png" alt="" loading="lazy"><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636707890364.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>

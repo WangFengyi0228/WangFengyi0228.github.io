@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>OD | R-CNN、SPP-net | one in a million</title>
+<meta name="description" content="我在你的心里，有没有一点特别">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636707908223">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wangfengyi0228.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://wangfengyi0228.github.io">
+        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636707908223" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://wangfengyi0228.github.io">
+        <h1 class="site-title">one in a million</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">OD | R-CNN、SPP-net</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-28</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://wangfengyi0228.github.io/tag/ON6Mm0HVp/">
+                    Object Detection
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://wangfengyi0228.github.io/tag/vYR76uwI3/">
+                    Computer Vision
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="参考文献">参考文献</h1>
+<ul>
+<li>[1]Uijlings J R R, Van De Sande K E A, Gevers T, et al. Selective search for object recognition[J]. International journal of computer vision, 2013, 104(2): 154-171.</li>
+<li>[2]Girshick R , Donahue J , Darrell T , et al. Rich Feature Hierarchies for Accurate Object Detection and Semantic Segmentation[C]// CVPR. IEEE, 2014.</li>
+<li>[3]He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[J]. IEEE transactions on pattern analysis and machine intelligence, 2015, 37(9): 1904-1916<br>
+#1.R-CNN<br>
+R-CNN采取的总体思路是：首先输入一张图片，生成1K~2K个候选区域，对每个候选区域，使用CNN提取特征，接着采用svm算法对各个候选框中的物体进行分类识别，最后使用回归器精细修正候选框位置。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636699933320.png" alt="" loading="lazy"><br>
+<strong>1.1候选框的搜索</strong><br>
+当输入一张图片时，要搜索出所有可能是物体的区域，这个采用的方法是传统文献的算法：selective search for object recognition。<s>这个算法的过程类似于构建赫夫曼树</s>。<br>
+<strong>1.1.1selective search for object recognition</strong><br>
+以往的目标检测的做法主要是基于穷举搜索（Exhaustive Search）：选择一个窗口扫描整张图像，改变窗口的大小，继续扫描整张图像。这种做法是比较原始直观，但改变窗口大小，扫描整张图像，非常耗时。若能过滤掉一些无用的box将会节省大量时间。这就是Selective Search(选择性搜索)的优点。<br>
+选择性搜索(Selective Search)综合了穷举搜索（Exhausticve Search)和分割(Segmentation)的方法，意在找到一些可能的目标位置集合。作者将穷举搜索和分割结合起来，采取组合策略保证搜索的多样性，能够大幅度降低搜索空间，提高程序效率，减小计算量。<br>
+在图像中，同一个物体在像素点尺度上具有一定的相似性，如颜色值相似性、纹理相似性、尺度相似性等等。Selective Search正是利用了同一物体在像素点尺度范围的相似性，不断的去合并一些达到预设相似性阈值的相邻像素点，从而将可能属于同一物体的像素点合并，形成一个区域box。这样将一张图像中所有具有一定相似性的像素点合并，形成一些可能属于同一物体的区域集，作为下一步用来检测的区域集，即可能的目标boxes。</li>
+</ul>
+<p>算法过程：<br>
+(1)输入：彩色图片（三通道）。<br>
+(2)获取初始分割区域R={r1,r2,…,rn}，初始化相似度集合S=∅。<br>
+(3)计算R中两两相邻区域（ri,rj）之间的相似度，将其添加到相似度集合S中。<br>
+(4)从相似度集合S中找出，相似度最大的两个区域ri和rj，将其合并成为一个区域 rt。然后从相似度集合中除去原先与ri和rj相邻区域之间计算的相似度。计算新的rt与其相邻区域（原先与ri或rj相邻的区域）的相似度，将其结果添加的到相似度集合S中。同时将新区域 rt 添加到区域集合R中。迭代直至S为空，即可合并区域的都已合并完。 区域的合并方式类似于哈夫曼树的构造过程，因此称之有层次（hierarchical）。<br>
+(5)获取R中每个区域的Bounding Boxes，这个结果就是图像中物体可能位置的可能结果集合L。</p>
+<p><strong>1.1.2缩放处理</strong><br>
+候选框是矩形的，而且大小各不相同。然而CNN对输入图片的大小是固定的，因此对于每个输入的候选框都需要缩放到固定的大小。缩放共有两种方法。<br>
+(1)各向异性缩放<br>
+无论图片原来的长宽比例，无论它是否扭曲，直接进行缩放，全部缩放到CNN输入的大小277*277，如下图第四列。<br>
+(2)各向同性缩放<br>
+因为图片扭曲后，会对后续CNN的训练精度有影响，于是作者也测试了“各向同性缩放”方案，有两种办法：<br>
+A.直接在原始图片中，把bounding box的边界进行扩展延伸成正方形，然后再进行裁剪；如果已经延伸到了原始图片的外边界，那么就用bounding box中的颜色均值填充(padding)，如下图第二列。<br>
+B.先把bounding box图片裁剪出来，然后用固定的背景颜色填充成正方形图片(背景颜色也是采用bounding box的像素颜色均值)，如下图第三列。<br>
+经过作者一系列实验表明采用padding=16的各向异性变形即下图第二行第三列效果最好，能使mAP提升3-5%。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636699973235.png" alt="" loading="lazy"></p>
+<p><strong>1.2 CNN特征提取</strong><br>
+采用Alexnet网络及其初始参数，学习率=0.01进行预训练。接着采用selective search 搜索出来的候选框，处理到指定大小图片，继续对预训练的CNN模型进行fine-tuning训练。假设要检测的物体类别有N类，需要把预训练阶段的CNN模型的最后一层给替换掉，替换成N+1个输出的神经元(加1表示还有一个背景)，然后这一层直接采用参数随机初始化的方法，其它网络层的参数不变；接着继续做随机梯度下降法SGD训练。开始的时候，SGD学习率选择0.001，在每次训练的时候，batch size大小选择128，其中32个正样本、96个负样本。</p>
+<p><strong>1.3 SVM训练</strong><br>
+为了更好地定义正样本与负样本，作者测试了IOU阈值的各种方案数值0,0.1,0.2,0.3,0.4,0.5。最后通过训练发现，如果选择IOU阈值为0.3效果最好,即当IOU小于0.3的时候，就把它标注为负样本（选择为0时，精度下降了4个百分点，选择0.5时，精度下降了5个百分点）。一旦CNN f7层特征被提取出来，那么将为每个物体类训练一个svm分类器。当用CNN提取2000个候选框时，可以得到2000<em>4096这样的特征向量矩阵，然后只需要把这样的一个矩阵与svm权值矩阵4096</em>N点乘(N为分类类别数目，训练了N个svm，每个svm包好了4096个W)，就可以得到结果了。</p>
+<p><strong>1.4创新点及缺点</strong><br>
+创新点：采用AlexNet CNN网络进行CNN特征提取，为了适应AlexNet网络的输入图像大小，对图片的各种变形方式进行了分析。采用了大样本下的有监督预训练+小样本微调的方式解决小样本难以训练甚至过拟合等问题。<br>
+缺点：步骤繁琐，R-CNN的训练先要fine tuning一个预训练的网络，然后针对每个类别都训练一个SVM分类器，最后还要用对bounding-box进行回归，region proposal也要单独用selective search的方式获得。每张图片的每个region proposal都要做卷积，重复操作太多。时间和内存消耗比较大，在训练SVM和回归的时候需要用网络训练的特征作为输入。</p>
+<h1 id="2spp-net">2.SPP-net</h1>
+<p><strong>2.1概述</strong><br>
+在CNN的训练和测试中存在一个技术问题：目前流行的CNN需要一个固定的输入图像大小（例如224*224），这限制了输入图像的纵横比和比例。当应用于任意大小的图像时，当前的方法大多是通过裁剪或扭曲,将输入图像调整到固定大小。但是裁剪区域可能不包含整个对象，而扭曲的内容可能会导致不必要的几何扭曲。由于内容丢失或失真，识别精度可能会受到影响。此外，一个预先定义的尺度当对象比例变化时可能不适用。固定输入大小忽略了涉及规模的问题。<br>
+那么为什么cnn需要一个固定的输入大小呢？CNN网络可以分解为卷积网络部分以及全连接网络部分。卷积网络的参数主要是卷积核，完全能够适用任意大小的输入，并且能够产生任意大小的输出。但是全连接层部分不同，全连接层部分的参数是神经元对于所有输入的连接权重，也就是说输入尺寸不固定的话，全连接层参数的个数不能固定。<br>
+SPP-net给出的解决方案是，既然只有全连接层需要固定的输入，那么在全连接层前加入一个网络层，使其对任意的输入产生固定的输出即可。SPP-net引入了空间金字塔，其主要思路是对于一副图像分成若干尺度的一些块，然后对于每一块提取特征后融合在一起，这样就可以兼容多个尺度的特征。SPP-net首次将这种思想应用在CNN中，对于卷积层特征也先将其分成不同的尺寸，然后每个尺寸提取一个固定维度的特征，最后拼接这些特征就形成了固定维度的输入。<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700002894.png" alt="" loading="lazy"><br>
+从上图可以看出SPP-net和R-CNN的区别，首先是输入不需要放缩或裁剪到指定大小；其次是增加了一个空间金字塔池化层，且每幅图片只需要提取一次特征，这也解决了 R-CNN 重复计算的问题。SPP-net 的思路是由于原图与经过卷积层后得到的特征图在空间位置上存在一定的对应关系，所以只需对整张图像进行一次卷积层特征提取，然后将候选区域在原图的位置映射到卷积层的特征图上得到该候选区域的特征，最后将得到每个候选区域的卷积层特征输入到全连接层进行后续操作。R-CNN 要对每个区域计算卷积，而 SPP-net只需要计算一次卷积，从而节省了大量的计算时间。</p>
+<p><strong>2.2网络结构</strong><br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700019764.png" alt="" loading="lazy"><br>
+空间金字塔池化层的网络结构如上图所示，SPP-net在conv5层得到的特征图是256层，每层都做一次spatial pyramid pooling。先把每个特征图分割成多个不同尺寸的网格，比如网格分别为4<em>4、2</em>2、1<em>1,然后每个网格做max pooling，这样256层特征图就形成了16</em>256，4<em>256，1</em>256维特征，他们连起来就形成了一个固定长度为(4<em>4+2</em>2+1)*256 维的的特征向量，将这个向量输入到后面的全连接层。</p>
+<p><strong>2.3优势与不足</strong><br>
+SPP-net对R-CNN最大的改进就是特征提取步骤做了修改，特征提取不再需要每个候选区域都经过CNN，只需要将整张图片输入到CNN就可以了，只需要进行一次卷积层特征提取，和R-CNN相比，速度提高了百倍。<br>
+然而和RCNN一样，SPP也需要训练CNN提取特征，然后训练SVM分类这些特征。需要巨大的存储空间，并且分开训练或参数微调也很复杂。而且selective search的方法提取特征是在CPU上进行的，相对于GPU来说还是比较慢的。</p>
+<h1 id="3总结">3.总结</h1>
+<p><strong>(1)R-CNN</strong><br>
+R-CNN首次将CNN引入目标检测，其整体流程框架如下图所示：<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636700063348.png" alt="" loading="lazy"></p>
+<ul>
+<li>
+<p>优点：<br>
+1.为了适应AlexNet网络的输入图像大小，对图片的各种变形方式进行了分析。<br>
+2.采用大样本下有监督预训练+小样本微调的方式解决小样本难以训练甚至过拟合等问题（迁移学习）。</p>
+</li>
+<li>
+<p>缺点：<br>
+1.针对传统CNN需要固定尺寸的输入图像，crop/warp（归一化）产生物体截断或拉伸，会 导致输入CNN的信息丢失。<br>
+2.训练过程太慢，需要对每一个候选区域都输入到cnn中再进行提取特征。<br>
+3.步骤相对较多，需要fine-tune预训练模型、训练SVM分类器、用回归器进行精细的调整。<br>
+4.占用空间大，提取出的特征以及分类器都需要占用额外的空间。<br>
+5.没有对资源进行重复利用，在使用SVM分类和对框进行回归操作的时候cnn模型的参数并没有同步修改。</p>
+</li>
+</ul>
+<p><strong>(2)SPP-Net</strong><br>
+SPP-Net的流程与R-CNN类似，只是在提取特征阶段没有对图像进行crop/warp，而是采用空间金字塔池化(Spatial Pyramid Pooling )替换了全连接层之前的最后一个池化层，如下图所示：</p>
+<figure data-type="image" tabindex="1"><img src="https://wangfengyi0228.github.io/post-images/1636700158157.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>优点：<br>
+1.取消了crop/warp图像归一化过程，解决图像变形导致的信息丢失以及存储问题。<br>
+2.采用空间金字塔池化（SpatialPyramid Pooling ）替换了全连接层之前的最后一个池化层，有效解决了卷积层的重复计算问题。</p>
+</li>
+<li>
+<p>缺点：<br>
+1.同R-CNN一样分开训练CNN和SVM、BB回归器，训练SVM的特征需要提前保存在磁盘需要巨大的存储空间；多段训练实现较复杂。<br>
+2.CNN和SVM的训练独立导致SVM的训练Loss无法更新SPP-Layer之前的卷积层参数，因此即使采用更深的CNN网络进行特征提取，也无法保证SVM分类器的准确率一定能够提升。<br>
+3.使用selective search的方法提取region proposal，是在CPU上进行耗时较长。</p>
+</li>
+</ul>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/od-or-fast-r-cnnfaster-r-cnn/">
+              <h3 class="post-title">
+                下一篇：OD | Fast R-CNN、Faster R-CNN
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">我在你的心里，有没有一点特别</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Copyright by WFY | <a class="rss" href="https://wangfengyi0228.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
