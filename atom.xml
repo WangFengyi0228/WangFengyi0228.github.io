@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wangfengyi0228.github.io</id>
     <title>one in a million</title>
-    <updated>2021-11-12T04:36:12.998Z</updated>
+    <updated>2021-11-12T04:42:46.735Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wangfengyi0228.github.io"/>
     <link rel="self" href="https://wangfengyi0228.github.io/atom.xml"/>
@@ -203,6 +203,201 @@ chasis_state_.imu_state_ = state.imu_state_;<br>
 
     emit Position_signal(car_position_);
 }```
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Practice | Missing number]]></title>
+        <id>https://wangfengyi0228.github.io/post/practice-or-missing-number/</id>
+        <link href="https://wangfengyi0228.github.io/post/practice-or-missing-number/">
+        </link>
+        <updated>2021-04-26T04:40:22.000Z</updated>
+        <content type="html"><![CDATA[<p>Given a positive integer n(n≤40), pick n-1 numbers randomly from 1 to n and concatenate them in random order as a string s, which means there is a missing number between 1 and n. Can you find the missing number?(Notice that in some cases the answer will not be unique, and in these cases you only need to find one valid answer.）</p>
+<h2 id="sample-input-1">Sample Input 1:</h2>
+<p>20<br>
+81971112205101569183132414117</p>
+<h2 id="sample-output-1">Sample Output 1:</h2>
+<p>16</p>
+<h1 id="solution">Solution:</h1>
+<p>#include &lt;bits/stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int len,n;<br>
+bool f[100];<br>
+string s;<br>
+int num[100];</p>
+<p>void dfs(int k)<br>
+{<br>
+if(k&gt;=len)<br>
+{<br>
+for(int i=1;i&lt;=n;i++)<br>
+{<br>
+if(f[i]==false)<br>
+{<br>
+printf(&quot;%d\n&quot;,i);<br>
+}<br>
+}<br>
+return;<br>
+}<br>
+if(f[num[k]]==false)<br>
+{<br>
+f[num[k]]=true;<br>
+dfs(k+1);<br>
+f[num[k]]=false;<br>
+}<br>
+if(f[num[k]*10+num[k+1]]==false&amp;&amp;num[k]*10+num[k+1]&lt;=n)<br>
+{<br>
+f[num[k]*10+num[k+1]]=true;<br>
+dfs(k+2);<br>
+f[num[k]*10+num[k+1]]=false;<br>
+}<br>
+}</p>
+<p>int main()<br>
+{<br>
+scanf(&quot;%d&quot;,&amp;n);<br>
+cin&gt;&gt;s;<br>
+for(int i=0;i&lt;s.size();i++)<br>
+{<br>
+num[i]=s[i]-'0';<br>
+}<br>
+len=s.size();<br>
+dfs(0);<br>
+return 0;<br>
+}</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Practice | Root of AVL Tree]]></title>
+        <id>https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/</id>
+        <link href="https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/">
+        </link>
+        <updated>2019-11-19T04:36:26.000Z</updated>
+        <content type="html"><![CDATA[<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636692006948.png" alt="" loading="lazy"><br>
+Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
+<h1 id="input-specification">Input Specification:</h1>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤20) which is the total number of keys to be inserted. Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
+<h1 id="output-specification">Output Specification:</h1>
+<p>For each test case, print the root of the resulting AVL tree in one line.</p>
+<h2 id="sample-input-1">Sample Input 1:</h2>
+<p>5<br>
+88 70 61 96 120</p>
+<h2 id="sample-output-1">Sample Output 1:</h2>
+<p>70</p>
+<h2 id="sample-input-2">Sample Input 2:</h2>
+<p>7<br>
+88 70 61 96 120 90 65</p>
+<h2 id="sample-output-2">Sample Output 2:</h2>
+<p>88</p>
+<h1 id="solution">Solution:</h1>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+typedef struct node
+{
+    int data,height;
+    node *lchild,*rchild;
+}node;
+
+int getheight(node* k)
+{
+    if(k==nullptr)
+        return 0;
+    else return k-&gt;height;
+}
+
+node* l_rotate(node* &amp;k1)
+{
+    node *k2=k1-&gt;rchild;
+
+    k1-&gt;rchild=k2-&gt;lchild;
+    k2-&gt;lchild=k1;
+    k1-&gt;height=max(getheight(k1-&gt;lchild),getheight(k1-&gt;rchild))+1;
+    k2-&gt;height=max(getheight(k2-&gt;lchild),getheight(k2-&gt;rchild))+1;
+    return k2;
+}
+
+node* r_rotate(node* &amp;k1)
+{
+    node *k2=k1-&gt;lchild;
+
+    k1-&gt;lchild=k2-&gt;rchild;
+    k2-&gt;rchild=k1;
+    k1-&gt;height=max(getheight(k1-&gt;rchild),getheight(k1-&gt;lchild))+1;
+    k2-&gt;height=max(getheight(k2-&gt;rchild),getheight(k2-&gt;lchild))+1;
+    return k2;
+}
+
+node* lr_rotate(node* &amp;k1)
+{
+    k1-&gt;lchild=l_rotate(k1-&gt;lchild);
+    return r_rotate(k1);
+}
+
+node* rl_rotate(node* &amp;k1)
+{
+    k1-&gt;rchild=r_rotate(k1-&gt;rchild);
+    return l_rotate(k1);
+}
+
+node* insertnode(int d,node* &amp;root)
+{
+    if(root==nullptr)
+    {
+        root=(node*)malloc(sizeof(node));
+        root-&gt;data=d;
+        root-&gt;lchild=nullptr;
+        root-&gt;rchild=nullptr;
+        root-&gt;height=0;
+    }
+    else if(d&lt;root-&gt;data)
+    {
+        root-&gt;lchild=insertnode(d,root-&gt;lchild);
+        if(getheight(root-&gt;lchild)-getheight(root-&gt;rchild)==2)
+        {
+            if(d&lt;root-&gt;lchild-&gt;data)
+            {
+                root=r_rotate(root);
+            }
+            else
+            {
+                root=lr_rotate(root);
+            }
+        }
+    }
+    else if(d&gt;root-&gt;data)
+    {
+        root-&gt;rchild=insertnode(d,root-&gt;rchild);
+        if(getheight(root-&gt;rchild)-getheight(root-&gt;lchild)==2)
+        {
+            if(d&gt;root-&gt;rchild-&gt;data)
+            {
+                root=l_rotate(root);
+            }
+            else
+            {
+                root=rl_rotate(root);
+            }
+        }
+    }
+    root-&gt;height=max(getheight(root-&gt;lchild),getheight(root-&gt;rchild))+1;
+    return root;
+}
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    node *root=nullptr;
+    for(int i=0;i&lt;n;i++)
+    {
+        int tmp;
+        scanf(&quot;%d&quot;,&amp;tmp);
+        root=insertnode(tmp,root);
+    }
+    printf(&quot;%d&quot;,root-&gt;data);
+    return 0;
+}
 </code></pre>
 ]]></content>
     </entry>

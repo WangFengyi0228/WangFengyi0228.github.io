@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>Gridea | one in a million</title>
+<title>Practice | Missing number | one in a million</title>
 <meta name="description" content="我在你的心里，有没有一点特别">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -78,53 +78,91 @@
 
 
       <div class="content-container">
-
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> Gridea
-          </h2> 
-        </div>
-
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://wangfengyi0228.github.io/post/hello-gridea/">
-        <h2 class="post-title">Welcome to My World</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2000-02-28</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
+        <div class="post-detail">
+          
+          <h2 class="post-title">Practice | Missing number</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-04-26</span>
             
-              <a href="https://wangfengyi0228.github.io/tag/6mxJnZ7l2/">
-                Gridea
+              <span>
+                <i class="icon-pricetags-outline"></i>
                 
-              </a>
+                  <a href="https://wangfengyi0228.github.io/tag/yhXS20aRT/">
+                    Algorithm
+                    
+                  </a>
+                
+              </span>
             
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://wangfengyi0228.github.io/post/hello-gridea/">
-        <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/hello-gridea.jpg')">
+          </div>
+          <div class="post-content">
+            <p>Given a positive integer n(n≤40), pick n-1 numbers randomly from 1 to n and concatenate them in random order as a string s, which means there is a missing number between 1 and n. Can you find the missing number?(Notice that in some cases the answer will not be unique, and in these cases you only need to find one valid answer.）</p>
+<h2 id="sample-input-1">Sample Input 1:</h2>
+<p>20<br>
+81971112205101569183132414117</p>
+<h2 id="sample-output-1">Sample Output 1:</h2>
+<p>16</p>
+<h1 id="solution">Solution:</h1>
+<p>#include &lt;bits/stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int len,n;<br>
+bool f[100];<br>
+string s;<br>
+int num[100];</p>
+<p>void dfs(int k)<br>
+{<br>
+if(k&gt;=len)<br>
+{<br>
+for(int i=1;i&lt;=n;i++)<br>
+{<br>
+if(f[i]==false)<br>
+{<br>
+printf(&quot;%d\n&quot;,i);<br>
+}<br>
+}<br>
+return;<br>
+}<br>
+if(f[num[k]]==false)<br>
+{<br>
+f[num[k]]=true;<br>
+dfs(k+1);<br>
+f[num[k]]=false;<br>
+}<br>
+if(f[num[k]*10+num[k+1]]==false&amp;&amp;num[k]*10+num[k+1]&lt;=n)<br>
+{<br>
+f[num[k]*10+num[k+1]]=true;<br>
+dfs(k+2);<br>
+f[num[k]*10+num[k+1]]=false;<br>
+}<br>
+}</p>
+<p>int main()<br>
+{<br>
+scanf(&quot;%d&quot;,&amp;n);<br>
+cin&gt;&gt;s;<br>
+for(int i=0;i&lt;s.size();i++)<br>
+{<br>
+num[i]=s[i]-'0';<br>
+}<br>
+len=s.size();<br>
+dfs(0);<br>
+return 0;<br>
+}</p>
+
+          </div>
         </div>
-      </a>
-    
-  </section>
 
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/">
+              <h3 class="post-title">
+                下一篇：Practice | Root of AVL Tree
+              </h3>
+            </a>
+          </div>
+          
       </div>
+
+      
 
       <div class="site-footer">
   <div class="slogan">我在你的心里，有没有一点特别</div>

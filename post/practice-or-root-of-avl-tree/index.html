@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>Practice | Root of AVL Tree | one in a million</title>
+<meta name="description" content="我在你的心里，有没有一点特别">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636692156721">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://wangfengyi0228.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://wangfengyi0228.github.io">
+        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636692156721" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://wangfengyi0228.github.io">
+        <h1 class="site-title">one in a million</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">Practice | Root of AVL Tree</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-11-19</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://wangfengyi0228.github.io/tag/yhXS20aRT/">
+                    Algorithm
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.<br>
+<img src="https://wangfengyi0228.github.io/post-images/1636692006948.png" alt="" loading="lazy"><br>
+Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
+<h1 id="input-specification">Input Specification:</h1>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤20) which is the total number of keys to be inserted. Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
+<h1 id="output-specification">Output Specification:</h1>
+<p>For each test case, print the root of the resulting AVL tree in one line.</p>
+<h2 id="sample-input-1">Sample Input 1:</h2>
+<p>5<br>
+88 70 61 96 120</p>
+<h2 id="sample-output-1">Sample Output 1:</h2>
+<p>70</p>
+<h2 id="sample-input-2">Sample Input 2:</h2>
+<p>7<br>
+88 70 61 96 120 90 65</p>
+<h2 id="sample-output-2">Sample Output 2:</h2>
+<p>88</p>
+<h1 id="solution">Solution:</h1>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+typedef struct node
+{
+    int data,height;
+    node *lchild,*rchild;
+}node;
+
+int getheight(node* k)
+{
+    if(k==nullptr)
+        return 0;
+    else return k-&gt;height;
+}
+
+node* l_rotate(node* &amp;k1)
+{
+    node *k2=k1-&gt;rchild;
+
+    k1-&gt;rchild=k2-&gt;lchild;
+    k2-&gt;lchild=k1;
+    k1-&gt;height=max(getheight(k1-&gt;lchild),getheight(k1-&gt;rchild))+1;
+    k2-&gt;height=max(getheight(k2-&gt;lchild),getheight(k2-&gt;rchild))+1;
+    return k2;
+}
+
+node* r_rotate(node* &amp;k1)
+{
+    node *k2=k1-&gt;lchild;
+
+    k1-&gt;lchild=k2-&gt;rchild;
+    k2-&gt;rchild=k1;
+    k1-&gt;height=max(getheight(k1-&gt;rchild),getheight(k1-&gt;lchild))+1;
+    k2-&gt;height=max(getheight(k2-&gt;rchild),getheight(k2-&gt;lchild))+1;
+    return k2;
+}
+
+node* lr_rotate(node* &amp;k1)
+{
+    k1-&gt;lchild=l_rotate(k1-&gt;lchild);
+    return r_rotate(k1);
+}
+
+node* rl_rotate(node* &amp;k1)
+{
+    k1-&gt;rchild=r_rotate(k1-&gt;rchild);
+    return l_rotate(k1);
+}
+
+node* insertnode(int d,node* &amp;root)
+{
+    if(root==nullptr)
+    {
+        root=(node*)malloc(sizeof(node));
+        root-&gt;data=d;
+        root-&gt;lchild=nullptr;
+        root-&gt;rchild=nullptr;
+        root-&gt;height=0;
+    }
+    else if(d&lt;root-&gt;data)
+    {
+        root-&gt;lchild=insertnode(d,root-&gt;lchild);
+        if(getheight(root-&gt;lchild)-getheight(root-&gt;rchild)==2)
+        {
+            if(d&lt;root-&gt;lchild-&gt;data)
+            {
+                root=r_rotate(root);
+            }
+            else
+            {
+                root=lr_rotate(root);
+            }
+        }
+    }
+    else if(d&gt;root-&gt;data)
+    {
+        root-&gt;rchild=insertnode(d,root-&gt;rchild);
+        if(getheight(root-&gt;rchild)-getheight(root-&gt;lchild)==2)
+        {
+            if(d&gt;root-&gt;rchild-&gt;data)
+            {
+                root=l_rotate(root);
+            }
+            else
+            {
+                root=rl_rotate(root);
+            }
+        }
+    }
+    root-&gt;height=max(getheight(root-&gt;lchild),getheight(root-&gt;rchild))+1;
+    return root;
+}
+
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    node *root=nullptr;
+    for(int i=0;i&lt;n;i++)
+    {
+        int tmp;
+        scanf(&quot;%d&quot;,&amp;tmp);
+        root=insertnode(tmp,root);
+    }
+    printf(&quot;%d&quot;,root-&gt;data);
+    return 0;
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                下一篇：Welcome to My World
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">我在你的心里，有没有一点特别</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Copyright by WFY | <a class="rss" href="https://wangfengyi0228.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
