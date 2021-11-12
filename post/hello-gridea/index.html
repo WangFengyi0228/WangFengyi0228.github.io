@@ -1,105 +1,105 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Welcome to My World | Gridea</title>
-<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636687616384">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+    
+<meta charset="utf-8" >
+
+<title>Welcome to My World | one in a million</title>
+<meta name="description" content="我在你的心里，有没有一点特别">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636687994299">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://wangfengyi0228.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Welcome to My World | Gridea - Atom Feed" href="https://wangfengyi0228.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="2000-02-28  Student ，  XMU
-👏 欢迎来到我的blog ！持续建设ing
-✍️ 记录我的笔记、生活、心情... ...
-🤙 不要问我为什么图文不符，因为我愿意😋
-🎓 想要了解更多或联系博主请查看关于
-🕙 想..." />
-    <meta name="keywords" content="Gridea" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://wangfengyi0228.github.io">
-  <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636687616384" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://wangfengyi0228.github.io">
+        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636687994299" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://wangfengyi0228.github.io">
+        <h1 class="site-title">one in a million</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Welcome to My World
-            </h2>
-            <div class="post-info">
-              <span>
-                2000-02-28
-              </span>
-              <span>
-                1 min read
-              </span>
-              
-                <a href="https://wangfengyi0228.github.io/tag/6mxJnZ7l2/" class="post-tag">
-                  # Gridea
-                </a>
-              
+          
+            <div class="feature-container" style="background-image: url('https://wangfengyi0228.github.io/post-images/hello-gridea.jpg')">
             </div>
+          
+          <h2 class="post-title">Welcome to My World</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2000-02-28</span>
             
-              <img class="post-feature-image" src="https://wangfengyi0228.github.io/post-images/hello-gridea.jpg" alt="">
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://wangfengyi0228.github.io/tag/6mxJnZ7l2/">
+                    Gridea
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>2000-02-28  Student ，  XMU</p>
+          </div>
+          <div class="post-content">
+            <p>2000-02-28  Student ，  XMU</p>
 <p>👏 欢迎来到我的blog ！持续建设ing<br>
 ✍️ 记录我的笔记、生活、心情... ...<br>
 🤙 不要问我为什么图文不符，因为我愿意😋</p>
@@ -115,67 +115,49 @@
 2021.9.28 | 新增文章阅读量统计功能<br>
 2021.10.2 | 新增Katex渲染，可以用markdown写公式啦</p>
 
-              </div>
-              <div class="toc-container">
-                
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
+      </div>
 
-        
+      
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://wangfengyi0228.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+      <div class="site-footer">
+  <div class="slogan">我在你的心里，有没有一点特别</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Copyright by WFY | <a class="rss" href="https://wangfengyi0228.github.io/atom.xml" target="_blank">RSS</a>
 </div>
 
-      </div>
+
     </div>
+    <script type="application/javascript">
 
-    <script>
-      hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
-      // This should probably be throttled.
-      // Especially because it triggers during smooth scrolling.
-      // https://lodash.com/docs/4.17.10#throttle
-      // You could do like...
-      // window.addEventListener("scroll", () => {
-      //    _.throttle(doThatStuff, 100);
-      // });
-      // Only not doing it here to keep this Pen dependency-free.
+</script>
 
-      window.addEventListener("scroll", event => {
-        let fromTop = window.scrollY;
 
-        mainNavLinks.forEach((link, index) => {
-          let section = document.getElementById(decodeURI(link.hash).substring(1));
-          let nextSection = null
-          if (mainNavLinks[index + 1]) {
-            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-          }
-          if (section.offsetTop <= fromTop) {
-            if (nextSection) {
-              if (nextSection.offsetTop > fromTop) {
-                link.classList.add("current");
-              } else {
-                link.classList.remove("current");    
-              }
-            } else {
-              link.classList.add("current");
-            }
-          } else {
-            link.classList.remove("current");
-          }
-        });
-      });
 
-    </script>
+
   </body>
 </html>
