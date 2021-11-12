@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636692156721">
+<link rel="shortcut icon" href="https://wangfengyi0228.github.io/favicon.ico?v=1636692404848">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://wangfengyi0228.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://wangfengyi0228.github.io">
-        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636692156721" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://wangfengyi0228.github.io/images/avatar.png?v=1636692404848" alt="" width="32px" height="32px">
       </a>
       <a href="https://wangfengyi0228.github.io">
         <h1 class="site-title">one in a million</h1>
@@ -103,59 +103,64 @@
 <h2 id="sample-output-1">Sample Output 1:</h2>
 <p>16</p>
 <h1 id="solution">Solution:</h1>
-<p>#include &lt;bits/stdc++.h&gt;</p>
-<p>using namespace std;</p>
-<p>int len,n;<br>
-bool f[100];<br>
-string s;<br>
-int num[100];</p>
-<p>void dfs(int k)<br>
-{<br>
-if(k&gt;=len)<br>
-{<br>
-for(int i=1;i&lt;=n;i++)<br>
-{<br>
-if(f[i]==false)<br>
-{<br>
-printf(&quot;%d\n&quot;,i);<br>
-}<br>
-}<br>
-return;<br>
-}<br>
-if(f[num[k]]==false)<br>
-{<br>
-f[num[k]]=true;<br>
-dfs(k+1);<br>
-f[num[k]]=false;<br>
-}<br>
-if(f[num[k]*10+num[k+1]]==false&amp;&amp;num[k]*10+num[k+1]&lt;=n)<br>
-{<br>
-f[num[k]*10+num[k+1]]=true;<br>
-dfs(k+2);<br>
-f[num[k]*10+num[k+1]]=false;<br>
-}<br>
-}</p>
-<p>int main()<br>
-{<br>
-scanf(&quot;%d&quot;,&amp;n);<br>
-cin&gt;&gt;s;<br>
-for(int i=0;i&lt;s.size();i++)<br>
-{<br>
-num[i]=s[i]-'0';<br>
-}<br>
-len=s.size();<br>
-dfs(0);<br>
-return 0;<br>
-}</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+int len,n;
+bool f[100];
+string s;
+int num[100];
+
+void dfs(int k)
+{
+    if(k&gt;=len)
+    {
+        for(int i=1;i&lt;=n;i++)
+        {
+            if(f[i]==false)
+            {
+                printf(&quot;%d\n&quot;,i);
+            }
+        }
+        return;
+    }
+    if(f[num[k]]==false)
+    {
+        f[num[k]]=true;
+        dfs(k+1);
+        f[num[k]]=false;
+    }
+    if(f[num[k]*10+num[k+1]]==false&amp;&amp;num[k]*10+num[k+1]&lt;=n)
+    {
+        f[num[k]*10+num[k+1]]=true;
+        dfs(k+2);
+        f[num[k]*10+num[k+1]]=false;
+    }
+}
+
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    cin&gt;&gt;s;
+    for(int i=0;i&lt;s.size();i++)
+    {
+        num[i]=s[i]-'0';
+    }
+    len=s.size();
+    dfs(0);
+    return 0;
+}
+</code></pre>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://wangfengyi0228.github.io/post/practice-or-root-of-avl-tree/">
+            <a class="purple-link" href="https://wangfengyi0228.github.io/post/practice-or-count-number-of-binary-strings-without-consecutive-1s/">
               <h3 class="post-title">
-                下一篇：Practice | Root of AVL Tree
+                下一篇：Practice | Count number of binary strings without consecutive 1’s
               </h3>
             </a>
           </div>
